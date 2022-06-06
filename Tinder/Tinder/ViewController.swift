@@ -8,21 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    private lazy var subViews = [UIColor.gray, .darkGray, .lightGray].map {
-        (color) -> UIView in
-        let someView = UIView()
-        someView.backgroundColor = color
-        return someView
-    }
-    
-    private lazy var topStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: subViews)
-        stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        return stackView
-    }()
+    private lazy var topButtonsStackView = TopNavigationStackView()
     
     private lazy var blueView: UIView = {
         let view = UIView()
@@ -33,7 +19,7 @@ class ViewController: UIViewController {
     private lazy var bottomButtonsStackView = BottomButtonsControlsStackView()
     
     private lazy var mainStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [topStackView, blueView, bottomButtonsStackView])
+        let stackView = UIStackView(arrangedSubviews: [topButtonsStackView, blueView, bottomButtonsStackView])
         stackView.axis = .vertical
         return stackView
     }()
