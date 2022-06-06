@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private lazy var subViews = [UIColor.gray, UIColor.darkGray, UIColor.lightGray].map {
+    private lazy var subViews = [UIColor.gray, .darkGray, .lightGray].map {
         (color) -> UIView in
         let someView = UIView()
         someView.backgroundColor = color
@@ -30,26 +30,12 @@ class ViewController: UIViewController {
         return view
     }()
     
-    private lazy var yellowView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .yellow
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.heightAnchor.constraint(equalToConstant: 120).isActive = true
-        return view
-    }()
+    private lazy var bottomButtonsStackView = BottomButtonsControlsStackView()
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [topStackView, blueView, yellowView])
+    private lazy var mainStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [topStackView, blueView, bottomButtonsStackView])
         stackView.axis = .vertical
-        stackView.frame = .init(x: 0, y: 0,
-                                width: 300, height: 200)
         return stackView
-    }()
-    
-    private lazy var grayView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray
-        return view
     }()
 
     override func viewDidLoad() {
@@ -58,8 +44,11 @@ class ViewController: UIViewController {
     }
     
     private func setupStackView() {
-        view.addSubview(stackView)
-        stackView.fillSuperview()
+        view.addSubview(mainStackView)
+        mainStackView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                             leading: view.leadingAnchor,
+                             bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                             trailing: view.trailingAnchor)
     }
 
 

@@ -14,6 +14,9 @@
 		BCC6FCDB2848BFD900E6E8E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCC6FCDA2848BFD900E6E8E0 /* Assets.xcassets */; };
 		BCC6FCDE2848BFD900E6E8E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCC6FCDC2848BFD900E6E8E0 /* LaunchScreen.storyboard */; };
 		BCE68ADC284A2AF200EBB5B6 /* Extensions + UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE68ADB284A2AF200EBB5B6 /* Extensions + UIView.swift */; };
+		BCE68ADE284E025C00EBB5B6 /* DownButtonsControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE68ADD284E025C00EBB5B6 /* DownButtonsControlsStackView.swift */; };
+		BCE68AF0284E279300EBB5B6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE68AEF284E279300EBB5B6 /* Constants.swift */; };
+		BCE68AF2284E39E100EBB5B6 /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE68AF1284E39E100EBB5B6 /* TopNavigationStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		BCC6FCDD2848BFD900E6E8E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BCC6FCDF2848BFD900E6E8E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCE68ADB284A2AF200EBB5B6 /* Extensions + UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions + UIView.swift"; sourceTree = "<group>"; };
+		BCE68ADD284E025C00EBB5B6 /* DownButtonsControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownButtonsControlsStackView.swift; sourceTree = "<group>"; };
+		BCE68AEF284E279300EBB5B6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BCE68AF1284E39E100EBB5B6 /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,10 +68,13 @@
 				BCC6FCD12848BFD500E6E8E0 /* AppDelegate.swift */,
 				BCC6FCD32848BFD500E6E8E0 /* SceneDelegate.swift */,
 				BCC6FCD52848BFD500E6E8E0 /* ViewController.swift */,
+				BCE68ADD284E025C00EBB5B6 /* DownButtonsControlsStackView.swift */,
+				BCE68AF1284E39E100EBB5B6 /* TopNavigationStackView.swift */,
 				BCC6FCD72848BFD500E6E8E0 /* Main.storyboard */,
 				BCC6FCDA2848BFD900E6E8E0 /* Assets.xcassets */,
 				BCC6FCDC2848BFD900E6E8E0 /* LaunchScreen.storyboard */,
 				BCC6FCDF2848BFD900E6E8E0 /* Info.plist */,
+				BCE68AEF284E279300EBB5B6 /* Constants.swift */,
 			);
 			path = Tinder;
 			sourceTree = "<group>";
@@ -151,8 +160,11 @@
 			files = (
 				BCE68ADC284A2AF200EBB5B6 /* Extensions + UIView.swift in Sources */,
 				BCC6FCD62848BFD500E6E8E0 /* ViewController.swift in Sources */,
+				BCE68ADE284E025C00EBB5B6 /* DownButtonsControlsStackView.swift in Sources */,
+				BCE68AF2284E39E100EBB5B6 /* TopNavigationStackView.swift in Sources */,
 				BCC6FCD22848BFD500E6E8E0 /* AppDelegate.swift in Sources */,
 				BCC6FCD42848BFD500E6E8E0 /* SceneDelegate.swift in Sources */,
+				BCE68AF0284E279300EBB5B6 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
