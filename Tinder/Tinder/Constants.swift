@@ -19,4 +19,14 @@ class Constants {
         static let star = UIImage(named: "star")
         static let chat = UIImage(named: "chat")
     }
+    
+    class Photo {
+        static let girl1 = UIImage(named: "girl1")
+        static let girl2 = UIImage(named: "girl2")
+        static let girl3 = UIImage(named: "girl3")
+        static let girl4 = UIImage(named: "girl4")
+        static let girl5 = UIImage(named: "girl5")
+        static let girl6 = UIImage(named: "girl6")
+
+    }
 }

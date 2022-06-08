@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC7AB56B2850CFD700C3E2B5 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7AB56A2850CFD700C3E2B5 /* PhotoView.swift */; };
 		BCC6FCD22848BFD500E6E8E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC6FCD12848BFD500E6E8E0 /* AppDelegate.swift */; };
 		BCC6FCD42848BFD500E6E8E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC6FCD32848BFD500E6E8E0 /* SceneDelegate.swift */; };
 		BCC6FCD62848BFD500E6E8E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC6FCD52848BFD500E6E8E0 /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BC7AB56A2850CFD700C3E2B5 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		BCC6FCCE2848BFD500E6E8E0 /* Tinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCC6FCD12848BFD500E6E8E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCC6FCD32848BFD500E6E8E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				BCC6FCD52848BFD500E6E8E0 /* ViewController.swift */,
 				BCE68ADD284E025C00EBB5B6 /* DownButtonsControlsStackView.swift */,
 				BCE68AF1284E39E100EBB5B6 /* TopNavigationStackView.swift */,
+				BC7AB56A2850CFD700C3E2B5 /* PhotoView.swift */,
 				BCC6FCD72848BFD500E6E8E0 /* Main.storyboard */,
 				BCC6FCDA2848BFD900E6E8E0 /* Assets.xcassets */,
 				BCC6FCDC2848BFD900E6E8E0 /* LaunchScreen.storyboard */,
@@ -165,6 +168,7 @@
 				BCC6FCD22848BFD500E6E8E0 /* AppDelegate.swift in Sources */,
 				BCC6FCD42848BFD500E6E8E0 /* SceneDelegate.swift in Sources */,
 				BCE68AF0284E279300EBB5B6 /* Constants.swift in Sources */,
+				BC7AB56B2850CFD700C3E2B5 /* PhotoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
