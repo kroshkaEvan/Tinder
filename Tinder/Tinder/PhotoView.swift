@@ -10,8 +10,7 @@ import UIKit
 class PhotoView: UIView {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Constants.Photo.girl6
-        translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = Constants.Photo.girl2
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 20
@@ -44,7 +43,7 @@ class PhotoView: UIView {
         case .changed:
             gestureChanged(gesture)
         case .ended:
-            gestureEnded()
+            gestureEnded(gesture)
         default:
             ()
         }
@@ -52,17 +51,36 @@ class PhotoView: UIView {
     
     fileprivate func gestureChanged(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: nil)
-        self.transform = CGAffineTransform(translationX: translation.x,
-                                           y: translation.y)
+        let degrees: CGFloat = translation.x / 20
+        let angle = degrees * .pi / 180
+        let rotationalTranformetion = CGAffineTransform(rotationAngle: angle)
+        self.transform = rotationalTranformetion.translatedBy(x: translation.x,
+                                                              y: translation.y)
     }
     
-    fileprivate func gestureEnded() {
+    fileprivate func gestureEnded(_ gesture: UIPanGestureRecognizer) {
+        let treshold: CGFloat = 100
+        let shouldDismissPhoto = gesture.translation(in: nil).x > treshold
+        
         UIView.animate(withDuration: 0.75,
                        delay: 0,
-                       usingSpringWithDamping: 0.5,
+                       usingSpringWithDamping: 0.6,
                        initialSpringVelocity: 0.1,
                        options: .curveEaseOut,
-                       animations: { self.transform = .identity})
+                       animations: {
+            if shouldDismissPhoto {
+                self.frame = CGRect(x: 1000, y: 0,
+                                    width: self.frame.width,
+                                    height: self.frame.height)
+            } else {
+                self.transform = .identity
+            }}) { (_) in
+                self.transform = .identity
+                if let superview = self.superview {
+                    self.frame = CGRect(x: 0, y: 0,
+                                        width: superview.frame.width,
+                                        height: superview.frame.height)
+                }
+            }
     }
-    
 }
