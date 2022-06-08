@@ -59,19 +59,23 @@ class PhotoView: UIView {
     }
     
     fileprivate func gestureEnded(_ gesture: UIPanGestureRecognizer) {
-        let treshold: CGFloat = 100
-        let shouldDismissPhoto = gesture.translation(in: nil).x > treshold
-        
+        let treshold: CGFloat = 130
+        let rightDismissPhoto = gesture.translation(in: nil).x > treshold
+        let leftDismissPhoto = gesture.translation(in: nil).x < -treshold
+        var translationX: CGFloat = 1000
         UIView.animate(withDuration: 0.75,
                        delay: 0,
                        usingSpringWithDamping: 0.6,
                        initialSpringVelocity: 0.1,
                        options: .curveEaseOut,
                        animations: {
-            if shouldDismissPhoto {
-                self.frame = CGRect(x: 1000, y: 0,
-                                    width: self.frame.width,
-                                    height: self.frame.height)
+            if rightDismissPhoto || leftDismissPhoto {
+                if leftDismissPhoto {
+                    translationX = -1000
+                }
+                let transform = self.transform.translatedBy(x: translationX,
+                                                            y: 0)
+                self.transform = transform
             } else {
                 self.transform = .identity
             }}) { (_) in
