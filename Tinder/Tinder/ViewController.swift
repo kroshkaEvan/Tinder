@@ -26,10 +26,10 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupStackView()
+        setupStackViewsLayout()
     }
     
-    private func setupStackView() {
+    private func setupStackViewsLayout() {
         view.addSubview(mainStackView)
         mainStackView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
                              leading: view.leadingAnchor,

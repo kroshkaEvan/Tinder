@@ -19,8 +19,6 @@ class BottomButtonsControlsStackView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addButtonSubviews()
-        distribution = .fillEqually
-        heightAnchor.constraint(equalToConstant: 90).isActive = true
     }
     
     required init(coder: NSCoder) {
@@ -31,6 +29,8 @@ class BottomButtonsControlsStackView: UIStackView {
         buttonSubviews.forEach { someButton in
             addArrangedSubview(someButton)
         }
+        distribution = .fillEqually
+        heightAnchor.constraint(equalToConstant: 90).isActive = true
     }
     
 }

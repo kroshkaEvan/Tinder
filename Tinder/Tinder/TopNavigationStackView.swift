@@ -8,28 +8,42 @@
 import UIKit
 
 class TopNavigationStackView: UIStackView {
-    private lazy var images = [Constants.Image.person, Constants.Image.fire, Constants.Image.chat]
-    
-    private lazy var buttonSubviews = self.images.map { (image) -> UIView in
+    private lazy var chatButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(Constants.Image.chat?.withRenderingMode(.alwaysOriginal),
+                        for: .normal)
         return button
-    }
+    }()
+    
+    private lazy var settingsButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(Constants.Image.person?.withRenderingMode(.alwaysOriginal),
+                        for: .normal)
+        return button
+    }()
+    
+    private lazy var fireButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(Constants.Image.fire?.withRenderingMode(.alwaysOriginal),
+                        for: .normal)
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addButtonSubviews()
-        distribution = .fillEqually
-        heightAnchor.constraint(equalToConstant: 90).isActive = true
+        setupStackViewLayout()
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func addButtonSubviews() {
-        buttonSubviews.forEach { someButton in
-            addArrangedSubview(someButton)
-        }
+    private func setupStackViewLayout() {
+        distribution = .equalCentering
+        [settingsButton, fireButton, chatButton].forEach { addArrangedSubview($0) }
+        heightAnchor.constraint(equalToConstant: 80).isActive = true
+        isLayoutMarginsRelativeArrangement = true
+        layoutMargins = .init(top: 0, left: 25,
+                              bottom: 0, right: 25)
     }
 }
