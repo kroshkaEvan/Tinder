@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeController.swift
 //  Tinder
 //
 //  Created by Эван Крошкин on 2.06.22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeController: UIViewController {
     private lazy var topButtonsStackView = TopNavigationStackView()
     
     private lazy var backgroundView: UIView = {
@@ -23,19 +23,30 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var photoDeckView: UIView = {
-        let view = PhotoView(frame: .zero)
-        return view
-    }()
+//    private lazy var photoDeckView: UIView = {
+//        let view = PhotoView(frame: .zero)
+//        return view
+//    }()
+    
+    private let users = [
+        User(name: "Kim", age: 40,
+             professional: "Fashion model", imageName: Constants.Photo.girl6) ,
+        User(name: "Nicole", age: 19,
+             professional: "Teacher", imageName: Constants.Photo.girl1) ,
+        User(name: "Anna", age: 22,
+             professional: "Driver", imageName: Constants.Photo.girl2) ,
+        User(name: "Nasty", age: 25,
+             professional: "Developer", imageName: Constants.Photo.girl3)]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStackViewsLayout()
-        setupPhotoDeckLayout()
+        setupAllUsers()
     }
     
     private func setupStackViewsLayout() {
         view.addSubview(mainStackView)
+        view.backgroundColor = .systemBackground
         mainStackView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
                              leading: view.leadingAnchor,
                              bottom: view.safeAreaLayoutGuide.bottomAnchor,
@@ -47,8 +58,15 @@ class ViewController: UIViewController {
     }
     
     private func setupPhotoDeckLayout() {
+        let photoDeckView = PhotoView(frame: .zero)
         backgroundView.addSubview(photoDeckView)
         photoDeckView.fillSuperview()
+    }
+    
+    private func setupAllUsers() {
+        (users).forEach { (user) in
+            setupPhotoDeckLayout()
+        }
     }
 
 

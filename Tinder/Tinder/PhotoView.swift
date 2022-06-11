@@ -63,12 +63,21 @@ class PhotoView: UIView {
         let rightDismissPhoto = gesture.translation(in: nil).x > treshold
         let leftDismissPhoto = gesture.translation(in: nil).x < -treshold
         var translationX: CGFloat = 1000
+
+//        let shouldDismissPhoto = gesture.translation(in: nil).x > treshold
+//        let translationX: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
+//
         UIView.animate(withDuration: 0.75,
                        delay: 0,
                        usingSpringWithDamping: 0.6,
                        initialSpringVelocity: 0.1,
                        options: .curveEaseOut,
                        animations: {
+//            if shouldDismissPhoto {
+//                self.frame = CGRect(x: 600 * translationX, y: 0,
+//                                    width: self.frame.width,
+//                                    height: self.frame.height)
+
             if rightDismissPhoto || leftDismissPhoto {
                 if leftDismissPhoto {
                     translationX = -1000
@@ -80,11 +89,7 @@ class PhotoView: UIView {
                 self.transform = .identity
             }}) { (_) in
                 self.transform = .identity
-                if let superview = self.superview {
-                    self.frame = CGRect(x: 0, y: 0,
-                                        width: superview.frame.width,
-                                        height: superview.frame.height)
-                }
+                self.removeFromSuperview()
             }
     }
 }
