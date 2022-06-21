@@ -12,5 +12,5 @@ struct User {
     let name: String
     let age: Int
     let professional: String
-    let imageName: UIImage!
+    let image: UIImage!
 }

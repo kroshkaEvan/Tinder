@@ -8,7 +8,7 @@
 import UIKit
 
 class PhotoView: UIView {
-    private lazy var imageView: UIImageView = {
+    lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = Constants.Photo.girl2
         imageView.clipsToBounds = true

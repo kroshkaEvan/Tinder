@@ -30,18 +30,18 @@ class HomeController: UIViewController {
     
     private let users = [
         User(name: "Kim", age: 40,
-             professional: "Fashion model", imageName: Constants.Photo.girl6) ,
+             professional: "Fashion model", image: Constants.Photo.girl4) ,
         User(name: "Nicole", age: 19,
-             professional: "Teacher", imageName: Constants.Photo.girl1) ,
+             professional: "Teacher", image: Constants.Photo.girl1) ,
         User(name: "Anna", age: 22,
-             professional: "Driver", imageName: Constants.Photo.girl2) ,
+             professional: "Driver", image: Constants.Photo.girl2) ,
         User(name: "Nasty", age: 25,
-             professional: "Developer", imageName: Constants.Photo.girl3)]
+             professional: "Developer", image: Constants.Photo.girl3)]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStackViewsLayout()
-        setupAllUsers()
+        setupPhotoDeckLayout()
     }
     
     private func setupStackViewsLayout() {
@@ -58,17 +58,15 @@ class HomeController: UIViewController {
     }
     
     private func setupPhotoDeckLayout() {
-        let photoDeckView = PhotoView(frame: .zero)
-        backgroundView.addSubview(photoDeckView)
-        photoDeckView.fillSuperview()
-    }
-    
-    private func setupAllUsers() {
         (users).forEach { (user) in
-            setupPhotoDeckLayout()
+            lazy var photoDeckView: UIView = {
+                let view = PhotoView(frame: .zero)
+                view.imageView.image = user.image
+                return view
+            }()
+            backgroundView.addSubview(photoDeckView)
+            photoDeckView.fillSuperview()
         }
     }
-
-
 }
 
