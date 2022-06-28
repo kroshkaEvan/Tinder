@@ -11,6 +11,6 @@ import UIKit
 struct User {
     let name: String
     let age: Int
-    let professional: String
+    let profession: String
     let image: UIImage!
 }

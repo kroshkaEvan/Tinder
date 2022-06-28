@@ -29,14 +29,14 @@ class HomeController: UIViewController {
 //    }()
     
     private let users = [
-        User(name: "Kim", age: 40,
-             professional: "Fashion model", image: Constants.Photo.girl4) ,
+        User(name: "Kim", age: 30,
+             profession: "Fashion model", image: Constants.Photo.girl4) ,
         User(name: "Nicole", age: 19,
-             professional: "Teacher", image: Constants.Photo.girl1) ,
+             profession: "Teacher", image: Constants.Photo.girl1) ,
         User(name: "Anna", age: 22,
-             professional: "Driver", image: Constants.Photo.girl2) ,
-        User(name: "Nasty", age: 25,
-             professional: "Developer", image: Constants.Photo.girl3)]
+             profession: "Driver", image: Constants.Photo.girl2) ,
+        User(name: "Nasty", age: 32,
+             profession: "Developer", image: Constants.Photo.girl3)]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +62,17 @@ class HomeController: UIViewController {
             lazy var photoDeckView: UIView = {
                 let view = PhotoView(frame: .zero)
                 view.imageView.image = user.image
+                view.infoLabel.text = "\(user.name) \(user.age)\n\(user.profession)"
+                let attributedText = NSMutableAttributedString(string: user.name,
+                                                               attributes: [.font: UIFont.systemFont(ofSize: 30,
+                                                                                                     weight: .heavy)])
+                attributedText.append(NSAttributedString(string: " \(user.age)",
+                                                         attributes: [.font: UIFont.systemFont(ofSize: 26,
+                                                                                               weight: .regular)]))
+                attributedText.append(NSAttributedString(string: "\n\(user.profession)",
+                                                         attributes: [.font: UIFont.systemFont(ofSize: 20,
+                                                                                               weight: .regular)]))
+                view.infoLabel.attributedText = attributedText
                 return view
             }()
             backgroundView.addSubview(photoDeckView)

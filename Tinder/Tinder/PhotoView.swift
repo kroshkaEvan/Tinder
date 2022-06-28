@@ -17,6 +17,15 @@ class PhotoView: UIView {
         return imageView
     }()
     
+    lazy var infoLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 35,
+                                       weight: .heavy)
+        label.numberOfLines = 2
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupPhotoViewLayout()
@@ -28,8 +37,15 @@ class PhotoView: UIView {
     }
     
     private func setupPhotoViewLayout() {
-        addSubview(imageView)
+        [imageView, infoLabel].forEach { addSubview($0) }
         imageView.fillSuperview()
+        infoLabel.anchor(top: nil,
+                         leading: self.leadingAnchor,
+                         bottom: self.bottomAnchor,
+                         trailing: self.trailingAnchor,
+                         padding: .init(top: 0, left: 20, bottom: 20, right: 20))
+        self.bringSubviewToFront(infoLabel)
+        
     }
     
     private func addPanGesture() {
@@ -60,16 +76,17 @@ class PhotoView: UIView {
     
     fileprivate func gestureEnded(_ gesture: UIPanGestureRecognizer) {
         let treshold: CGFloat = 130
+        
         let rightDismissPhoto = gesture.translation(in: nil).x > treshold
         let leftDismissPhoto = gesture.translation(in: nil).x < -treshold
         var translationX: CGFloat = 1000
 
 //        let shouldDismissPhoto = gesture.translation(in: nil).x > treshold
 //        let translationX: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
-//
+
         UIView.animate(withDuration: 0.75,
                        delay: 0,
-                       usingSpringWithDamping: 0.6,
+                       usingSpringWithDamping: 0.5,
                        initialSpringVelocity: 0.1,
                        options: .curveEaseOut,
                        animations: {
@@ -85,11 +102,14 @@ class PhotoView: UIView {
                 let transform = self.transform.translatedBy(x: translationX,
                                                             y: 0)
                 self.transform = transform
+                
             } else {
                 self.transform = .identity
             }}) { (_) in
                 self.transform = .identity
-                self.removeFromSuperview()
+                if rightDismissPhoto || leftDismissPhoto {
+                    self.removeFromSuperview()
+                }
             }
     }
 }
