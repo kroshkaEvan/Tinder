@@ -23,20 +23,21 @@ class HomeController: UIViewController {
         return stackView
     }()
     
-//    private lazy var photoDeckView: UIView = {
-//        let view = PhotoView(frame: .zero)
-//        return view
-//    }()
-    
-    private let users = [
-        User(name: "Kim", age: 30,
-             profession: "Fashion model", image: Constants.Photo.girl4) ,
-        User(name: "Nicole", age: 19,
-             profession: "Teacher", image: Constants.Photo.girl1) ,
-        User(name: "Anna", age: 22,
-             profession: "Driver", image: Constants.Photo.girl2) ,
-        User(name: "Nasty", age: 32,
-             profession: "Developer", image: Constants.Photo.girl3)]
+    private let photoViewModel: [PhotoViewModel] = {
+        let producers = [
+            User(name: "Kim", age: 30,
+                 profession: "Fashion model", imageString: Constants.Photo.girl4) ,
+            User(name: "Nicole", age: 19,
+                 profession: "Teacher", imageString: Constants.Photo.girl1) ,
+            Advertiser(brandName: "State of Survival", title: "Play Now", posterName: Constants.Photo.state) ,
+            User(name: "Anna", age: 22,
+                 profession: "Driver", imageString: Constants.Photo.girl2) ,
+            User(name: "Nasty", age: 32,
+                 profession: "Developer", imageString: Constants.Photo.girl3)
+        ] as [ProducesPhotoViewModel]
+        let viewModels = producers.map({return $0.getPhotoViewModel()})
+        return viewModels
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,21 +59,12 @@ class HomeController: UIViewController {
     }
     
     private func setupPhotoDeckLayout() {
-        (users).forEach { (user) in
+        photoViewModel.forEach { (photoViewModel) in
             lazy var photoDeckView: UIView = {
                 let view = PhotoView(frame: .zero)
-                view.imageView.image = user.image
-                view.infoLabel.text = "\(user.name) \(user.age)\n\(user.profession)"
-                let attributedText = NSMutableAttributedString(string: user.name,
-                                                               attributes: [.font: UIFont.systemFont(ofSize: 30,
-                                                                                                     weight: .heavy)])
-                attributedText.append(NSAttributedString(string: " \(user.age)",
-                                                         attributes: [.font: UIFont.systemFont(ofSize: 26,
-                                                                                               weight: .regular)]))
-                attributedText.append(NSAttributedString(string: "\n\(user.profession)",
-                                                         attributes: [.font: UIFont.systemFont(ofSize: 20,
-                                                                                               weight: .regular)]))
-                view.infoLabel.attributedText = attributedText
+                view.imageView.image = UIImage(named: photoViewModel.imageString)
+                view.infoLabel.attributedText = photoViewModel.attributedText
+                view.infoLabel.textAlignment = photoViewModel.textAlignment
                 return view
             }()
             backgroundView.addSubview(photoDeckView)

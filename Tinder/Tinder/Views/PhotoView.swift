@@ -10,7 +10,6 @@ import UIKit
 class PhotoView: UIView {
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Constants.Photo.girl2
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 20
