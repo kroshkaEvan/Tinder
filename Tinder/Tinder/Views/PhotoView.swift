@@ -8,6 +8,17 @@
 import UIKit
 
 class PhotoView: UIView {
+    
+    var viewModel: PhotoViewModel? {
+        didSet {
+            if let viewModel = viewModel {
+                imageView.image = UIImage(named: viewModel.imageString)
+                infoLabel.attributedText = viewModel.attributedText
+                infoLabel.textAlignment = viewModel.textAlignment
+            }
+        }
+    }
+    
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true

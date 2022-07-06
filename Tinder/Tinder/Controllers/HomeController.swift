@@ -62,9 +62,7 @@ class HomeController: UIViewController {
         photoViewModel.forEach { (photoViewModel) in
             lazy var photoDeckView: UIView = {
                 let view = PhotoView(frame: .zero)
-                view.imageView.image = UIImage(named: photoViewModel.imageString)
-                view.infoLabel.attributedText = photoViewModel.attributedText
-                view.infoLabel.textAlignment = photoViewModel.textAlignment
+                view.viewModel = photoViewModel
                 return view
             }()
             backgroundView.addSubview(photoDeckView)
