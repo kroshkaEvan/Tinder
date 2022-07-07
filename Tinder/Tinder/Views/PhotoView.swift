@@ -17,6 +17,7 @@ class PhotoView: UIView {
                 infoLabel.attributedText = viewModel.attributedText
                 infoLabel.textAlignment = viewModel.textAlignment
                 getCountImages(viewModel: viewModel)
+                setupImageIndexObserver()
             }
         }
     }
@@ -97,6 +98,17 @@ class PhotoView: UIView {
         }
     }
     
+    private func setupImageIndexObserver() {
+        viewModel?.imageIndexObserver = { [weak self] (index, image) in
+            self?.imageView.image = image
+            self?.segmentedBarStackView.arrangedSubviews.forEach { barView in
+                barView.backgroundColor = .white.withAlphaComponent(0.3)
+            }
+            self?.segmentedBarStackView.arrangedSubviews[index].backgroundColor = .white
+        }
+    }
+
+    
     private func setupImageGradienLayer() {
         let gradienLayer = CAGradientLayer()
         gradienLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
@@ -135,18 +147,10 @@ class PhotoView: UIView {
         let locationTap = gesture.location(in: nil)
         let shouldAdvanceNextPhoto = locationTap.x > frame.width/2 ? true : false
         if shouldAdvanceNextPhoto {
-            imageIndex = min(imageIndex + 1, viewModel.imagesString.count - 1)
+            viewModel.goToNextPhoto()
         } else {
-            imageIndex = max(0, imageIndex - 1)
+            viewModel.goToPreviousPhoto()
         }
-                             
-        let imageName = viewModel.imagesString[imageIndex]
-        imageView.image = UIImage(named: imageName)
-        
-        segmentedBarStackView.arrangedSubviews.forEach { barView in
-            barView.backgroundColor = .white.withAlphaComponent(0.3)
-        }
-        segmentedBarStackView.arrangedSubviews[imageIndex].backgroundColor = .white
     }
     
     private func gestureChanged(_ gesture: UIPanGestureRecognizer) {
