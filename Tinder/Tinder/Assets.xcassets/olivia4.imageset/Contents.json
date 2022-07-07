@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "oliviacastaxx_284355431_476290947632306_3533329430255379901_n.jpeg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

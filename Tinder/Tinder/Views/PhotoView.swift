@@ -46,6 +46,10 @@ class PhotoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        setupGradienLayerImage()
+    }
+    
     private func setupPhotoViewLayout() {
         [imageView, infoLabel].forEach { addSubview($0) }
         imageView.fillSuperview()
@@ -53,9 +57,17 @@ class PhotoView: UIView {
                          leading: self.leadingAnchor,
                          bottom: self.bottomAnchor,
                          trailing: self.trailingAnchor,
-                         padding: .init(top: 0, left: 20, bottom: 20, right: 20))
+                         padding: .init(top: 0, left: 20,
+                                        bottom: 20, right: 20))
         self.bringSubviewToFront(infoLabel)
-        
+    }
+    
+    private func setupGradienLayerImage() {
+        let gradienLayer = CAGradientLayer()
+        gradienLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradienLayer.locations = [0.5, 1.2]
+        gradienLayer.frame = self.frame
+        imageView.layer.addSublayer(gradienLayer)
     }
     
     private func addPanGesture() {
@@ -66,6 +78,10 @@ class PhotoView: UIView {
     
     @objc private func didPanGestureAction(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
+        case .began:
+            superview?.subviews.forEach({ subviews in
+                subviews.layer.removeAllAnimations()
+            })
         case .changed:
             gestureChanged(gesture)
         case .ended:
@@ -75,7 +91,7 @@ class PhotoView: UIView {
         }
     }
     
-    fileprivate func gestureChanged(_ gesture: UIPanGestureRecognizer) {
+    private func gestureChanged(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: nil)
         let degrees: CGFloat = translation.x / 20
         let angle = degrees * .pi / 180
@@ -84,7 +100,7 @@ class PhotoView: UIView {
                                                               y: translation.y)
     }
     
-    fileprivate func gestureEnded(_ gesture: UIPanGestureRecognizer) {
+    private func gestureEnded(_ gesture: UIPanGestureRecognizer) {
         let treshold: CGFloat = 130
         
         let rightDismissPhoto = gesture.translation(in: nil).x > treshold

@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "rachelc00k_246943278_1276297942843671_3072485841390525572_n.jpeg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
