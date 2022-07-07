@@ -25,15 +25,19 @@ class HomeController: UIViewController {
     
     private let photoViewModel: [PhotoViewModel] = {
         let producers = [
-            User(name: "Kim", age: 30,
-                 profession: "Fashion model", imageString: Constants.Photo.girl4) ,
-            User(name: "Nicole", age: 19,
-                 profession: "Teacher", imageString: Constants.Photo.girl1) ,
+            User(name: "Alex", age: 28,
+                 profession: "Tik-Tok model", imagesString: Constants.Photo.girl6) ,
+            User(name: "Marta", age: 25,
+                 profession: "Bloger", imagesString: Constants.Photo.girl5) ,
+            User(name: "Nicole", age: 24,
+                 profession: "Teacher", imagesString: Constants.Photo.girl1) ,
             Advertiser(brandName: "State of Survival", title: "Play Now", posterName: Constants.Photo.state) ,
-            User(name: "Anna", age: 22,
-                 profession: "Driver", imageString: Constants.Photo.girl2) ,
-            User(name: "Nasty", age: 32,
-                 profession: "Developer", imageString: Constants.Photo.girl3)
+            User(name: "Kim", age: 34,
+                 profession: "CEO", imagesString: Constants.Photo.girl2) ,
+            User(name: "Aisha", age: 30,
+                 profession: "Front-end Developer", imagesString: Constants.Photo.girl3) ,
+            User(name: "Anna", age: 26,
+                 profession: "Fashion model", imagesString: Constants.Photo.girl4)
         ] as [ProducesPhotoViewModel]
         let viewModels = producers.map({return $0.getPhotoViewModel()})
         return viewModels

@@ -21,7 +21,7 @@ struct Advertiser: ProducesPhotoViewModel {
                                                  attributes: [.font: UIFont.systemFont(ofSize: 24,
                                                                                        weight: .bold)]))
                                                        
-        return PhotoViewModel(imageString: posterName,
+        return PhotoViewModel(imagesString: [posterName],
                               attributedText: attributedText,
                               textAlignment: .center)
     }

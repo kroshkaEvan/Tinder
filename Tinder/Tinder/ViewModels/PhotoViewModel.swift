@@ -13,7 +13,7 @@ protocol ProducesPhotoViewModel {
 }
 
 struct PhotoViewModel {
-    let imageString: String
+    let imagesString: [String]
     let attributedText: NSAttributedString
     let textAlignment: NSTextAlignment
 }

@@ -12,9 +12,11 @@ class PhotoView: UIView {
     var viewModel: PhotoViewModel? {
         didSet {
             if let viewModel = viewModel {
-                imageView.image = UIImage(named: viewModel.imageString)
+                let firstImage = viewModel.imagesString.first ?? ""
+                imageView.image = UIImage(named: firstImage)
                 infoLabel.attributedText = viewModel.attributedText
                 infoLabel.textAlignment = viewModel.textAlignment
+                getCountImages(viewModel: viewModel)
             }
         }
     }
@@ -36,6 +38,15 @@ class PhotoView: UIView {
         return label
     }()
     
+    private var imageIndex = 0
+    
+    private lazy var segmentedBarStackView: UIStackView = {
+        let barStackView = UIStackView()
+        barStackView.distribution = .fillEqually
+        barStackView.spacing = 4
+        return barStackView
+    }()
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupPhotoViewLayout()
@@ -47,11 +58,20 @@ class PhotoView: UIView {
     }
     
     override func layoutSubviews() {
-        setupGradienLayerImage()
+        setupImageGradienLayer()
     }
     
     private func setupPhotoViewLayout() {
-        [imageView, infoLabel].forEach { addSubview($0) }
+        [segmentedBarStackView ,imageView, infoLabel].forEach { addSubview($0) }
+        imageView.addSubview(segmentedBarStackView)
+        segmentedBarStackView.anchor(top: topAnchor,
+                                     leading: leadingAnchor,
+                                     bottom: nil,
+                                     trailing: trailingAnchor,
+                                     padding: .init(top: 5, left: 10,
+                                                    bottom: 0, right: 10),
+                                     size: .init(width: 0,
+                                                 height: 5))
         imageView.fillSuperview()
         infoLabel.anchor(top: nil,
                          leading: self.leadingAnchor,
@@ -60,9 +80,24 @@ class PhotoView: UIView {
                          padding: .init(top: 0, left: 20,
                                         bottom: 20, right: 20))
         self.bringSubviewToFront(infoLabel)
+        self.bringSubviewToFront(segmentedBarStackView)
     }
     
-    private func setupGradienLayerImage() {
+    private func getCountImages(viewModel: PhotoViewModel) {
+        (0..<viewModel.imagesString.count).forEach { _ in
+            let barView = UIView()
+            barView.layer.cornerRadius = 5
+            barView.backgroundColor = .white.withAlphaComponent(0.3)
+            segmentedBarStackView.addArrangedSubview(barView)
+        }
+        segmentedBarStackView.arrangedSubviews.first?.backgroundColor = .white
+        
+        if viewModel.imagesString.count == 1 {
+            segmentedBarStackView.isHidden = true
+        }
+    }
+    
+    private func setupImageGradienLayer() {
         let gradienLayer = CAGradientLayer()
         gradienLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
         gradienLayer.locations = [0.5, 1.2]
@@ -74,6 +109,9 @@ class PhotoView: UIView {
         let panGesture = UIPanGestureRecognizer(target: self,
                                                 action: #selector(didPanGestureAction))
         addGestureRecognizer(panGesture)
+        let swipeImagesGesture = UITapGestureRecognizer(target: self,
+                                                         action: #selector(didSwipeImagesAction))
+        addGestureRecognizer(swipeImagesGesture)
     }
     
     @objc private func didPanGestureAction(gesture: UIPanGestureRecognizer) {
@@ -89,6 +127,26 @@ class PhotoView: UIView {
         default:
             ()
         }
+    }
+
+    @objc private func didSwipeImagesAction(gesture: UITapGestureRecognizer) {
+        guard let viewModel = viewModel else {return}
+        
+        let locationTap = gesture.location(in: nil)
+        let shouldAdvanceNextPhoto = locationTap.x > frame.width/2 ? true : false
+        if shouldAdvanceNextPhoto {
+            imageIndex = min(imageIndex + 1, viewModel.imagesString.count - 1)
+        } else {
+            imageIndex = max(0, imageIndex - 1)
+        }
+                             
+        let imageName = viewModel.imagesString[imageIndex]
+        imageView.image = UIImage(named: imageName)
+        
+        segmentedBarStackView.arrangedSubviews.forEach { barView in
+            barView.backgroundColor = .white.withAlphaComponent(0.3)
+        }
+        segmentedBarStackView.arrangedSubviews[imageIndex].backgroundColor = .white
     }
     
     private func gestureChanged(_ gesture: UIPanGestureRecognizer) {

@@ -21,10 +21,12 @@ class Constants {
     }
     
     class Photo {
-        static let girl1 = "girl1"
-        static let girl2 = "girl2"
-        static let girl3 = "girl3"
-        static let girl4 = "girl4"
+        static let girl1 = ["bic1","bic2","bic3"]
+        static let girl2 = ["nic1", "nic2","nic3","nic4",]
+        static let girl3 = ["dev1","dev2","dev3"]
+        static let girl4 = ["olivia1","olivia2","olivia3","olivia4","olivia5"]
+        static let girl5 = ["rich1", "rich2"]
+        static let girl6 = ["aali1", "aali2","aali3","aali4"]
         static let state = "state"
     }
 }

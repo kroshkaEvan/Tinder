@@ -12,7 +12,7 @@ struct User: ProducesPhotoViewModel {
     let name: String
     let age: Int
     let profession: String
-    let imageString: String
+    let imagesString: [String]
     
     func getPhotoViewModel() -> PhotoViewModel{
         let attributedText = NSMutableAttributedString(string: name,
@@ -24,7 +24,7 @@ struct User: ProducesPhotoViewModel {
         attributedText.append(NSAttributedString(string: "\n\(profession)",
                                                  attributes: [.font: UIFont.systemFont(ofSize: 20,
                                                                                        weight: .regular)]))
-        return PhotoViewModel(imageString: imageString,
+        return PhotoViewModel(imagesString: imagesString,
                               attributedText: attributedText,
                               textAlignment: .left)
     }
