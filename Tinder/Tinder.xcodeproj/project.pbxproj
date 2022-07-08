@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC54C40028784B140009B8F5 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC54C3FF28784B140009B8F5 /* RegistrationController.swift */; };
+		BC54C402287863A60009B8F5 /* RegistrationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC54C401287863A60009B8F5 /* RegistrationTextField.swift */; };
 		BC7AB56B2850CFD700C3E2B5 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7AB56A2850CFD700C3E2B5 /* PhotoView.swift */; };
 		BCA0088028551EB800C8B371 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA0087F28551EB800C8B371 /* User.swift */; };
 		BCC6FCD22848BFD500E6E8E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC6FCD12848BFD500E6E8E0 /* AppDelegate.swift */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BC54C3FF28784B140009B8F5 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		BC54C401287863A60009B8F5 /* RegistrationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTextField.swift; sourceTree = "<group>"; };
 		BC7AB56A2850CFD700C3E2B5 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		BCA0087F28551EB800C8B371 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BCC6FCCE2848BFD500E6E8E0 /* Tinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,8 +83,8 @@
 		BCC6FCD02848BFD500E6E8E0 /* Tinder */ = {
 			isa = PBXGroup;
 			children = (
-				BCD3010C286B952300D9C880 /* ViewModels */,
 				BCA0087E28551E9800C8B371 /* Models */,
+				BCD3010C286B952300D9C880 /* ViewModels */,
 				BCD3010A286B940500D9C880 /* Views */,
 				BCD30109286B93E900D9C880 /* Controllers */,
 				BCD3010B286B941700D9C880 /* Support Files */,
@@ -96,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				BCC6FCD52848BFD500E6E8E0 /* HomeController.swift */,
+				BC54C3FF28784B140009B8F5 /* RegistrationController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -132,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				BCE68ADB284A2AF200EBB5B6 /* Extensions + UIView.swift */,
+				BC54C401287863A60009B8F5 /* RegistrationTextField.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -209,9 +215,11 @@
 				BCE68ADC284A2AF200EBB5B6 /* Extensions + UIView.swift in Sources */,
 				BCC6FCD62848BFD500E6E8E0 /* HomeController.swift in Sources */,
 				BCD30110286C92D900D9C880 /* Advertiser.swift in Sources */,
+				BC54C402287863A60009B8F5 /* RegistrationTextField.swift in Sources */,
 				BCE68ADE284E025C00EBB5B6 /* DownButtonsControlsStackView.swift in Sources */,
 				BCE68AF2284E39E100EBB5B6 /* TopNavigationStackView.swift in Sources */,
 				BCC6FCD22848BFD500E6E8E0 /* AppDelegate.swift in Sources */,
+				BC54C40028784B140009B8F5 /* RegistrationController.swift in Sources */,
 				BCA0088028551EB800C8B371 /* User.swift in Sources */,
 				BCC6FCD42848BFD500E6E8E0 /* SceneDelegate.swift in Sources */,
 				BCE68AF0284E279300EBB5B6 /* Constants.swift in Sources */,

@@ -45,6 +45,9 @@ class HomeController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        topButtonsStackView.settingsButton.addTarget(self,
+                                                     action: #selector(didTapSettingButton),
+                                                     for: .touchUpInside)
         setupStackViewsLayout()
         setupPhotoDeckLayout()
     }
@@ -72,6 +75,12 @@ class HomeController: UIViewController {
             backgroundView.addSubview(photoDeckView)
             photoDeckView.fillSuperview()
         }
+    }
+    
+    @objc func didTapSettingButton() {
+        let registrVC = RegistrationController()
+        registrVC.modalPresentationStyle = .fullScreen
+        present(registrVC, animated: true)
     }
 }
 

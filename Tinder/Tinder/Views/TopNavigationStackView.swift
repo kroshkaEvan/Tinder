@@ -8,21 +8,21 @@
 import UIKit
 
 class TopNavigationStackView: UIStackView {
-    private lazy var chatButton: UIButton = {
+    lazy var chatButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(Constants.Image.chat?.withRenderingMode(.alwaysOriginal),
                         for: .normal)
         return button
     }()
     
-    private lazy var settingsButton: UIButton = {
+    lazy var settingsButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(Constants.Image.person?.withRenderingMode(.alwaysOriginal),
                         for: .normal)
         return button
     }()
     
-    private lazy var fireButton: UIButton = {
+    lazy var fireButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(Constants.Image.fire?.withRenderingMode(.alwaysOriginal),
                         for: .normal)
