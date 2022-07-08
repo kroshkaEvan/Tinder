@@ -29,4 +29,9 @@ class Constants {
         static let girl6 = ["aali1", "aali2","aali3","aali4"]
         static let state = "state"
     }
+    
+    class Color {
+        static let topGradienApp = UIColor.rgb(red: 240, green: 121, blue: 69)
+        static let downGradienApp = UIColor.rgb(red: 229, green: 69, blue: 129)
+    }
 }
