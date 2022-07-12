@@ -27,7 +27,7 @@ class Constants {
         static let girl4 = ["olivia1","olivia2","olivia3","olivia4","olivia5"]
         static let girl5 = ["rich1", "rich2"]
         static let girl6 = ["aali1", "aali2","aali3","aali4"]
-        static let state = "state"
+        static let advertisement = "advertisement"
     }
     
     class Color {

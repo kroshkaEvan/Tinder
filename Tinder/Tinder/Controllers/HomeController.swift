@@ -18,7 +18,9 @@ class HomeController: UIViewController {
     private lazy var bottomButtonsStackView = BottomButtonsControlsStackView()
     
     private lazy var mainStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [topButtonsStackView, backgroundView, bottomButtonsStackView])
+        let stackView = UIStackView(arrangedSubviews: [topButtonsStackView,
+                                                       backgroundView,
+                                                       bottomButtonsStackView])
         stackView.axis = .vertical
         return stackView
     }()
@@ -31,7 +33,7 @@ class HomeController: UIViewController {
                  profession: "Bloger", imagesString: Constants.Photo.girl5) ,
             User(name: "Nicole", age: 24,
                  profession: "Teacher", imagesString: Constants.Photo.girl1) ,
-            Advertiser(brandName: "State of Survival", title: "Play Now", posterName: Constants.Photo.state) ,
+            Advertiser(brandName: "State of Survival", title: "Play Now", posterName: Constants.Photo.advertisement) ,
             User(name: "Kim", age: 34,
                  profession: "CEO", imagesString: Constants.Photo.girl2) ,
             User(name: "Aisha", age: 30,
