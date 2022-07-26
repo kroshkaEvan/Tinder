@@ -108,7 +108,6 @@ class PhotoView: UIView {
         }
     }
 
-    
     private func setupImageGradienLayer() {
         let gradienLayer = CAGradientLayer()
         gradienLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]

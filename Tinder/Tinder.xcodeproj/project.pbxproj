@@ -22,6 +22,7 @@
 		BCE68ADE284E025C00EBB5B6 /* DownButtonsControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE68ADD284E025C00EBB5B6 /* DownButtonsControlsStackView.swift */; };
 		BCE68AF0284E279300EBB5B6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE68AEF284E279300EBB5B6 /* Constants.swift */; };
 		BCE68AF2284E39E100EBB5B6 /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE68AF1284E39E100EBB5B6 /* TopNavigationStackView.swift */; };
+		BCF574312890485500C7B12C /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF574302890485500C7B12C /* RegisterViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		BCE68ADD284E025C00EBB5B6 /* DownButtonsControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownButtonsControlsStackView.swift; sourceTree = "<group>"; };
 		BCE68AEF284E279300EBB5B6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BCE68AF1284E39E100EBB5B6 /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
+		BCF574302890485500C7B12C /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				BCD3010D286B955A00D9C880 /* PhotoViewModel.swift */,
+				BCF574302890485500C7B12C /* RegisterViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				BCC6FCD22848BFD500E6E8E0 /* AppDelegate.swift in Sources */,
 				BC54C40028784B140009B8F5 /* RegistrationController.swift in Sources */,
 				BCA0088028551EB800C8B371 /* User.swift in Sources */,
+				BCF574312890485500C7B12C /* RegisterViewModel.swift in Sources */,
 				BCC6FCD42848BFD500E6E8E0 /* SceneDelegate.swift in Sources */,
 				BCE68AF0284E279300EBB5B6 /* Constants.swift in Sources */,
 				BC7AB56B2850CFD700C3E2B5 /* PhotoView.swift in Sources */,

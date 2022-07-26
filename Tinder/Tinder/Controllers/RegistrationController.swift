@@ -9,6 +9,8 @@ import UIKit
 
 class RegistrationController: UIViewController {
     
+    private let viewModel = RegisterViewModel()
+    
     private lazy var selectPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Select Photo",
@@ -23,7 +25,7 @@ class RegistrationController: UIViewController {
         return button
     }()
     
-    private lazy var userNameTextFild: RegistrationTextField = {
+    private lazy var userNameTextField: RegistrationTextField = {
         let textField = RegistrationTextField(padding: 24)
         textField.placeholder = "Enter your name"
         textField.backgroundColor = .white
@@ -31,7 +33,7 @@ class RegistrationController: UIViewController {
         return textField
     }()
     
-    private lazy var emailAddressTextFild: RegistrationTextField = {
+    private lazy var emailAddressTextField: RegistrationTextField = {
         let textField = RegistrationTextField(padding: 24)
         textField.placeholder = "Enter email"
         textField.keyboardType = .emailAddress
@@ -40,7 +42,7 @@ class RegistrationController: UIViewController {
         return textField
     }()
     
-    private lazy var passwordTextFild: RegistrationTextField = {
+    private lazy var passwordTextField: RegistrationTextField = {
         let textField = RegistrationTextField(padding: 24)
         textField.placeholder = "Enter your password"
         textField.isSecureTextEntry = true
@@ -51,9 +53,10 @@ class RegistrationController: UIViewController {
     
     private lazy var registrationButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .white
-        button.setTitleColor(.black, for: .normal)
-        button.setTitle("REGISTR", for: .normal)
+        button.backgroundColor = .lightGray
+        button.setTitleColor(.gray, for: .disabled)
+        button.isEnabled = false
+        button.setTitle("REGISTER", for: .normal)
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 25
         return button
@@ -61,9 +64,9 @@ class RegistrationController: UIViewController {
     
     private lazy var mainStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [selectPhotoButton,
-                                                       userNameTextFild,
-                                                       emailAddressTextFild,
-                                                       passwordTextFild,
+                                                       userNameTextField,
+                                                       emailAddressTextField,
+                                                       passwordTextField,
                                                        registrationButton])
         stackView.axis = .vertical
         stackView.spacing = 10
@@ -74,7 +77,16 @@ class RegistrationController: UIViewController {
         super.viewDidLoad()
         setupViewGradientLayer()
         setupLayout()
-        setupNotificationObservers()
+        addAllActions()
+        setupViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        userNameTextField.delegate = self
+        emailAddressTextField.delegate = self
+        passwordTextField.delegate = self
+        addNotificationObservers()
         addTapGesture()
     }
     
@@ -95,15 +107,37 @@ class RegistrationController: UIViewController {
         mainStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
+    private func setupViewModel() {
+        viewModel.isFormValidObserver = { [weak self] (isFormValid) in
+            self?.registrationButton.isEnabled = isFormValid
+            if isFormValid {
+                self?.registrationButton.backgroundColor = Constants.Color.topGradienApp
+                self?.registrationButton.setTitleColor(.white, for: .normal)
+            } else {
+                self?.registrationButton.backgroundColor = .lightGray
+                self?.registrationButton.setTitleColor(.gray, for: .normal)
+            }
+        }
+    }
+    
+    private func addAllActions() {
+        [userNameTextField, passwordTextField, emailAddressTextField].forEach { textField in
+            textField.addTarget(self,
+                                 action: #selector(didChangeText),
+                                 for: .editingChanged)
+        }
+    }
+    
     private func setupViewGradientLayer() {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [Constants.Color.topGradienApp.cgColor, Constants.Color.downGradienApp.cgColor]
+        gradientLayer.colors = [Constants.Color.topGradienApp.cgColor,
+                                Constants.Color.downGradienApp.cgColor]
         gradientLayer.locations = [0, 1]
         view.layer.addSublayer(gradientLayer)
         gradientLayer.frame = view.bounds
     }
     
-    private func setupNotificationObservers() {
+    private func addNotificationObservers() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(getKeyboardShow),
                                                name: UIResponder.keyboardWillShowNotification,
@@ -118,6 +152,19 @@ class RegistrationController: UIViewController {
         let gesture = UITapGestureRecognizer(target: self,
                                              action: #selector(didTapDismissKeyboard))
         view.addGestureRecognizer(gesture)
+    }
+    
+    @objc private func didChangeText(field: UITextField) {
+        switch field {
+        case userNameTextField:
+            return viewModel.userName = userNameTextField.text
+        case emailAddressTextField:
+            return viewModel.email = emailAddressTextField.text
+        case passwordTextField:
+            return viewModel.password = passwordTextField.text
+        default:
+            print("error")
+        }
     }
     
     @objc private func getKeyboardShow(notification: Notification) {
@@ -141,5 +188,22 @@ class RegistrationController: UIViewController {
     
     @objc func didTapDismissKeyboard() {
         self.view.endEditing(true)
+    }
+}
+
+extension RegistrationController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case userNameTextField:
+            emailAddressTextField.becomeFirstResponder()
+        case emailAddressTextField:
+            passwordTextField.becomeFirstResponder()
+        case passwordTextField:
+            passwordTextField.resignFirstResponder()
+//            self.didTapRegistration()
+        default:
+            print("non keyboard type")
+        }
+        return false
     }
 }
