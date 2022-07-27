@@ -51,7 +51,7 @@ class HomeController: UIViewController {
                                                      action: #selector(didTapSettingButton),
                                                      for: .touchUpInside)
         setupStackViewsLayout()
-        setupPhotoDeckLayout()
+        setupViewModel()
     }
     
     private func setupStackViewsLayout() {
@@ -67,7 +67,7 @@ class HomeController: UIViewController {
                                             bottom: 0, right: 5)
     }
     
-    private func setupPhotoDeckLayout() {
+    private func setupViewModel() {
         photoViewModel.forEach { (photoViewModel) in
             lazy var photoDeckView: UIView = {
                 let view = PhotoView(frame: .zero)

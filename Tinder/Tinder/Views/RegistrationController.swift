@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import JGProgressHUD
 
 class RegistrationController: UIViewController {
     
@@ -126,6 +128,9 @@ class RegistrationController: UIViewController {
                                  action: #selector(didChangeText),
                                  for: .editingChanged)
         }
+        registrationButton.addTarget(self,
+                                     action: #selector(didTapRegister),
+                                     for: .touchUpInside)
     }
     
     private func setupViewGradientLayer() {
@@ -148,6 +153,16 @@ class RegistrationController: UIViewController {
                                                object: nil)
     }
     
+    private func showHUDWith(error: Error) {
+        let loadingHUD = JGProgressHUD(style: .dark)
+        loadingHUD.textLabel.text = "Failed registration"
+        loadingHUD.detailTextLabel.text = error.localizedDescription
+        loadingHUD.show(in: self.view,
+                        animated: true)
+        loadingHUD.dismiss(afterDelay: 5,
+                           animated: true)
+    }
+    
     private func addTapGesture() {
         let gesture = UITapGestureRecognizer(target: self,
                                              action: #selector(didTapDismissKeyboard))
@@ -164,6 +179,22 @@ class RegistrationController: UIViewController {
             return viewModel.password = passwordTextField.text
         default:
             print("error")
+        }
+    }
+    
+    @objc private func didTapRegister() {
+        self.didTapDismissKeyboard()
+        guard let password = passwordTextField.text else {return}
+        guard let email = emailAddressTextField.text else {return}
+        Auth.auth().createUser(withEmail: email,
+                               password: password) {[weak self] (result, error) in
+            if let error = error {
+                print(error)
+                self?.showHUDWith(error: error)
+                return
+            }
+            
+            
         }
     }
     
