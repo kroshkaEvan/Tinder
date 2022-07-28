@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 import JGProgressHUD
 
 class RegistrationController: UIViewController {
@@ -77,6 +76,8 @@ class RegistrationController: UIViewController {
         return stackView
     }()
     
+    private lazy var loadingHUD = JGProgressHUD(style: .dark)
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewGradientLayer()
@@ -96,7 +97,7 @@ class RegistrationController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
+//        NotificationCenter.default.removeObserver(self)
     }
     
     private func setupLayout() {
@@ -122,6 +123,16 @@ class RegistrationController: UIViewController {
         viewModel.bindableImage.bind { [weak self] (image) in
             self?.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal),
                                              for: .normal)
+        }
+        viewModel.bindableIsRegistering.bind { [weak self] isRegistering in
+            guard let view = self?.view else {return}
+            if isRegistering == true {
+                self?.loadingHUD.textLabel.text = "Register"
+                self?.loadingHUD.show(in: view,
+                                      animated: true)
+            } else {
+                self?.loadingHUD.dismiss(animated: true)
+            }
         }
     }
     
@@ -160,13 +171,14 @@ class RegistrationController: UIViewController {
     }
     
     private func showHUDWith(error: Error) {
-        let loadingHUD = JGProgressHUD(style: .dark)
-        loadingHUD.textLabel.text = "Failed registration"
-        loadingHUD.detailTextLabel.text = error.localizedDescription
-        loadingHUD.show(in: self.view,
-                        animated: true)
-        loadingHUD.dismiss(afterDelay: 5,
-                           animated: true)
+        loadingHUD.dismiss()
+        let failedLoadingHUD = JGProgressHUD(style: .dark)
+        failedLoadingHUD.textLabel.text = "Failed registration"
+        failedLoadingHUD.detailTextLabel.text = error.localizedDescription
+        failedLoadingHUD.show(in: self.view,
+                              animated: true)
+        failedLoadingHUD.dismiss(afterDelay: 5,
+                                 animated: true)
     }
     
     private func addTapGesture() {
@@ -190,12 +202,9 @@ class RegistrationController: UIViewController {
     
     @objc private func didTapRegister() {
         self.didTapDismissKeyboard()
-        guard let password = passwordTextField.text else {return}
-        guard let email = emailAddressTextField.text else {return}
-        Auth.auth().createUser(withEmail: email,
-                               password: password) {[weak self] (_, error) in
+        // Authentication user email/password
+        viewModel.performRegitration { [weak self] error in
             if let error = error {
-                print(error)
                 self?.showHUDWith(error: error)
                 return
             }
@@ -252,7 +261,8 @@ extension RegistrationController: UITextFieldDelegate {
 
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let selectedPhoto = info[.originalImage] as? UIImage else {return}
         viewModel.bindableImage.value = selectedPhoto
         self.dismiss(animated: true, completion: nil)
