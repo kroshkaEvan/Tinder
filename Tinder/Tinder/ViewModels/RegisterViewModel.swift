@@ -35,6 +35,28 @@ class RegisterViewModel {
         bindableIsFormValid.value = isFormValid
     }
     
+    private func saveImageToFirebase(comletion: @escaping (Error?) -> ()) {
+        let fileName = UUID().uuidString
+        let reference = Storage.storage().reference(withPath: "/images/\(fileName)")
+        let imageData = self.bindableImage.value?.jpegData(compressionQuality: 0.75) ?? Data()
+        reference.putData(imageData,
+                          metadata: nil) { _, error in
+            if let error = error {
+                comletion(error)
+                return
+            }
+            reference.downloadURL { url, error in
+                if let error = error {
+                    comletion(error)
+                    return
+                }
+                self.bindableIsRegistering.value = false
+                print(url?.absoluteString ?? "")
+                comletion(nil)
+            }
+        }
+    }
+    
     func performRegitration(comletion: @escaping (Error?) -> ()) {
         bindableIsRegistering.value = true
         
@@ -48,24 +70,7 @@ class RegisterViewModel {
                 return
             }
             // Download image to storage
-            let fileName = UUID().uuidString
-            let reference = Storage.storage().reference(withPath: "/images/\(fileName)")
-            let imageData = self?.bindableImage.value?.jpegData(compressionQuality: 0.75) ?? Data()
-            reference.putData(imageData,
-                              metadata: nil) { _, error in
-                if let error = error {
-                    comletion(error)
-                    return
-                }
-                reference.downloadURL { url, error in
-                    if let error = error {
-                        comletion(error)
-                        return
-                    }
-                    self?.bindableIsRegistering.value = false
-                    print(url?.absoluteString ?? "")
-                }
-            }
+            self?.saveImageToFirebase(comletion: comletion)
         }
     }
 }
