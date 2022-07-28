@@ -21,7 +21,9 @@ class RegistrationController: UIViewController {
                                                     weight: .bold)
         button.setTitleColor(.cyan, for: .normal)
         button.backgroundColor = .white
+        button.imageView?.contentMode = .scaleAspectFill
         button.layer.cornerRadius = 25
+        button.clipsToBounds = true
         let heightButton = view.frame.size.width - 40
         button.heightAnchor.constraint(equalToConstant: heightButton).isActive = true
         return button
@@ -110,15 +112,16 @@ class RegistrationController: UIViewController {
     }
     
     private func setupViewModel() {
-        viewModel.isFormValidObserver = { [weak self] (isFormValid) in
+        viewModel.bindableIsFormValid.bind { [weak self] (isFormValid) in
+            guard let isFormValid = isFormValid else {return}
             self?.registrationButton.isEnabled = isFormValid
-            if isFormValid {
-                self?.registrationButton.backgroundColor = Constants.Color.topGradienApp
-                self?.registrationButton.setTitleColor(.white, for: .normal)
-            } else {
-                self?.registrationButton.backgroundColor = .lightGray
-                self?.registrationButton.setTitleColor(.gray, for: .normal)
-            }
+            self?.registrationButton.backgroundColor = isFormValid ? Constants.Color.topGradienApp : .lightGray
+            self?.registrationButton.setTitleColor(isFormValid ? .white : .gray,
+                                                   for: .normal)
+        }
+        viewModel.bindableImage.bind { [weak self] (image) in
+            self?.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal),
+                                             for: .normal)
         }
     }
     
@@ -131,6 +134,9 @@ class RegistrationController: UIViewController {
         registrationButton.addTarget(self,
                                      action: #selector(didTapRegister),
                                      for: .touchUpInside)
+        selectPhotoButton.addTarget(self,
+                                    action: #selector(didTapSelectPhoto),
+                                    for: .touchUpInside)
     }
     
     private func setupViewGradientLayer() {
@@ -187,15 +193,20 @@ class RegistrationController: UIViewController {
         guard let password = passwordTextField.text else {return}
         guard let email = emailAddressTextField.text else {return}
         Auth.auth().createUser(withEmail: email,
-                               password: password) {[weak self] (result, error) in
+                               password: password) {[weak self] (_, error) in
             if let error = error {
                 print(error)
                 self?.showHUDWith(error: error)
                 return
             }
-            
-            
         }
+    }
+    
+    @objc private func didTapSelectPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        present(imagePickerController,
+                animated: true)
     }
     
     @objc private func getKeyboardShow(notification: Notification) {
@@ -231,10 +242,23 @@ extension RegistrationController: UITextFieldDelegate {
             passwordTextField.becomeFirstResponder()
         case passwordTextField:
             passwordTextField.resignFirstResponder()
-//            self.didTapRegistration()
+            self.didTapRegister()
         default:
             print("non keyboard type")
         }
         return false
+    }
+}
+
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let selectedPhoto = info[.originalImage] as? UIImage else {return}
+        viewModel.bindableImage.value = selectedPhoto
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
     }
 }

@@ -24,6 +24,7 @@
 		BCE68AF0284E279300EBB5B6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE68AEF284E279300EBB5B6 /* Constants.swift */; };
 		BCE68AF2284E39E100EBB5B6 /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE68AF1284E39E100EBB5B6 /* TopNavigationStackView.swift */; };
 		BCEC5B1B2891565E005CA649 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCEC5B1A2891565E005CA649 /* GoogleService-Info.plist */; };
+		BCEC5B1D28925074005CA649 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEC5B1C28925074005CA649 /* Bindable.swift */; };
 		BCF574312890485500C7B12C /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF574302890485500C7B12C /* RegisterViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		BCE68AEF284E279300EBB5B6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BCE68AF1284E39E100EBB5B6 /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
 		BCEC5B1A2891565E005CA649 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BCEC5B1C28925074005CA649 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		BCF574302890485500C7B12C /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +71,7 @@
 			children = (
 				BCA0087F28551EB800C8B371 /* User.swift */,
 				BCD3010F286C92D900D9C880 /* Advertiser.swift */,
+				BCEC5B1C28925074005CA649 /* Bindable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				BCD30110286C92D900D9C880 /* Advertiser.swift in Sources */,
 				BC54C402287863A60009B8F5 /* RegistrationTextField.swift in Sources */,
 				BCE68ADE284E025C00EBB5B6 /* DownButtonsControlsStackView.swift in Sources */,
+				BCEC5B1D28925074005CA649 /* Bindable.swift in Sources */,
 				BCE68AF2284E39E100EBB5B6 /* TopNavigationStackView.swift in Sources */,
 				BCC6FCD22848BFD500E6E8E0 /* AppDelegate.swift in Sources */,
 				BC54C40028784B140009B8F5 /* RegistrationController.swift in Sources */,
