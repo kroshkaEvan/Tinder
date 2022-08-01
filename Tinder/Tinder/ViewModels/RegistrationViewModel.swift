@@ -1,5 +1,5 @@
 //
-//  RegisterViewModel.swift
+//  RegistrationViewModel.swift
 //  Tinder
 //
 //  Created by Эван Крошкин on 26.07.22.
@@ -8,8 +8,11 @@
 import UIKit
 import FirebaseAuth
 import FirebaseStorage
+import FirebaseFirestore
 
-class RegisterViewModel {
+typealias CompletionClosure = (Error?) -> Void
+
+class RegistrationViewModel {
     var userName: String? {
         didSet {
             checkFormValidity()
@@ -35,29 +38,46 @@ class RegisterViewModel {
         bindableIsFormValid.value = isFormValid
     }
     
-    private func saveImageToFirebase(comletion: @escaping (Error?) -> ()) {
+    private func saveImageToFirebase(completion: @escaping CompletionClosure) {
         let fileName = UUID().uuidString
         let reference = Storage.storage().reference(withPath: "/images/\(fileName)")
         let imageData = self.bindableImage.value?.jpegData(compressionQuality: 0.75) ?? Data()
         reference.putData(imageData,
                           metadata: nil) { _, error in
             if let error = error {
-                comletion(error)
+                completion(error)
                 return
             }
-            reference.downloadURL { url, error in
+            reference.downloadURL{ url, error in
                 if let error = error {
-                    comletion(error)
+                    completion(error)
                     return
                 }
                 self.bindableIsRegistering.value = false
-                print(url?.absoluteString ?? "")
-                comletion(nil)
+                let imagesURL = url?.absoluteString ?? ""
+                self.saveInfoToFirebase(imagesURL: imagesURL,
+                                        completion: completion)
+
             }
         }
     }
     
-    func performRegitration(comletion: @escaping (Error?) -> ()) {
+    private func saveInfoToFirebase(imagesURL: String,
+                                    completion: @escaping CompletionClosure) {
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        let documentData = ["userName" : userName ?? "",
+                            "uid" : uid,
+                            "imagesURL" : imagesURL] as [String : Any]
+        Firestore.firestore().collection("users").document(uid).setData(documentData) { (error) in
+            if let error = error {
+                completion(error)
+                return
+            }
+            completion(nil)
+        }
+    }
+    
+    func performRegitration(completion: @escaping CompletionClosure) {
         bindableIsRegistering.value = true
         
         guard let password = password else {return}
@@ -66,11 +86,11 @@ class RegisterViewModel {
         Auth.auth().createUser(withEmail: email,
                                password: password) {[weak self] (_, error) in
             if let error = error {
-                comletion(error)
+                completion(error)
                 return
             }
             // Download image to storage
-            self?.saveImageToFirebase(comletion: comletion)
+            self?.saveImageToFirebase(completion: completion)
         }
     }
 }

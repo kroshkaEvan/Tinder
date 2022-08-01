@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseCore
+import FirebaseFirestore
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -16,10 +17,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         FirebaseApp.configure()
+//        let db = Firestore.firestore()
+//        let settings = db.settings
+//        settings.areTimestampsInSnapshotsEnabled = true
+//        db.settings = settings
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = RegistrationController()
+        window?.rootViewController = PhotoCardController()
         window?.makeKeyAndVisible()
     }
 }

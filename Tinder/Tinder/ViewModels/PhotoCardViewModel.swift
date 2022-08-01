@@ -1,5 +1,5 @@
 //
-//  PhotoViewModel.swift
+//  PhotoCardViewModel.swift
 //  Tinder
 //
 //  Created by Эван Крошкин on 28.06.22.
@@ -8,24 +8,23 @@
 import Foundation
 import UIKit
 
-protocol ProducesPhotoViewModel {
-    func getPhotoViewModel() -> PhotoViewModel 
+protocol ProducesPhotoCardViewModel {
+    func getPhotoViewModel() -> PhotoCardViewModel 
 }
 
-class PhotoViewModel {
+class PhotoCardViewModel {
     let imagesString: [String]
     let attributedText: NSAttributedString
     let textAlignment: NSTextAlignment
     
     private var imageIndex = 0 {
         didSet {
-            let imageName = imagesString[imageIndex]
-            let image = UIImage(named: imageName)
-            imageIndexObserver?(imageIndex, image)
+            let imageURL = imagesString[imageIndex]
+            imageIndexObserver?(imageIndex, imageURL)
         }
     }
     
-    var imageIndexObserver: ((Int, UIImage?) -> ())?
+    var imageIndexObserver: ((Int, String?) -> ())?
     
     init(imagesString: [String], attributedText: NSAttributedString, textAlignment: NSTextAlignment) {
         self.imagesString = imagesString

@@ -10,7 +10,7 @@ import JGProgressHUD
 
 class RegistrationController: UIViewController {
     
-    private let viewModel = RegisterViewModel()
+    private let viewModel = RegistrationViewModel()
     
     private lazy var selectPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -82,7 +82,7 @@ class RegistrationController: UIViewController {
         super.viewDidLoad()
         setupViewGradientLayer()
         setupLayout()
-        addAllActions()
+        addAllTargets()
         setupViewModel()
     }
     
@@ -136,7 +136,7 @@ class RegistrationController: UIViewController {
         }
     }
     
-    private func addAllActions() {
+    private func addAllTargets() {
         [userNameTextField, passwordTextField, emailAddressTextField].forEach { textField in
             textField.addTarget(self,
                                  action: #selector(didChangeText),

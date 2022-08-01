@@ -8,24 +8,33 @@
 import Foundation
 import UIKit
 
-struct User: ProducesPhotoViewModel {
-    let name: String
-    let age: Int
-    let profession: String
-    let imagesString: [String]
+struct User: ProducesPhotoCardViewModel {
+    var name: String?
+    var age: Int?
+    var profession: String?
+    var imagesURL: String?
+    var uid: String?
     
-    func getPhotoViewModel() -> PhotoViewModel{
-        let attributedText = NSMutableAttributedString(string: name,
+    init(dictionary: [String : Any]) {
+        self.name = dictionary["userName"] as? String ?? ""
+        self.age = dictionary["age"] as? Int
+        self.profession = dictionary["profession"] as? String ?? ""
+        self.imagesURL = dictionary["imagesURL"] as? String ?? ""
+        self.uid = dictionary["uid"] as? String ?? ""
+    }
+    
+    func getPhotoViewModel() -> PhotoCardViewModel{
+        let attributedText = NSMutableAttributedString(string: name ?? "",
                                                        attributes: [.font: UIFont.systemFont(ofSize: 30,
                                                                                              weight: .heavy)])
-        attributedText.append(NSAttributedString(string: " \(age)",
+        attributedText.append(NSAttributedString(string: " \(age ?? 0)",
                                                  attributes: [.font: UIFont.systemFont(ofSize: 26,
                                                                                        weight: .regular)]))
-        attributedText.append(NSAttributedString(string: "\n\(profession)",
+        attributedText.append(NSAttributedString(string: "\n\(profession ?? "")",
                                                  attributes: [.font: UIFont.systemFont(ofSize: 20,
                                                                                        weight: .regular)]))
-        return PhotoViewModel(imagesString: imagesString,
-                              attributedText: attributedText,
-                              textAlignment: .left)
+        return PhotoCardViewModel(imagesString: [imagesURL ?? ""],
+                                  attributedText: attributedText,
+                                  textAlignment: .left)
     }
 }

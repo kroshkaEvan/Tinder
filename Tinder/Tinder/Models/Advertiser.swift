@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-struct Advertiser: ProducesPhotoViewModel {
+struct Advertiser: ProducesPhotoCardViewModel {
     let brandName: String
     let title: String
     let posterName: String
     
-    func getPhotoViewModel() -> PhotoViewModel {
+    func getPhotoViewModel() -> PhotoCardViewModel {
         let attributedText = NSMutableAttributedString(string: title,
                                                        attributes: [.font: UIFont.systemFont(ofSize: 30,
                                                                                              weight: .heavy)])
@@ -21,7 +21,7 @@ struct Advertiser: ProducesPhotoViewModel {
                                                  attributes: [.font: UIFont.systemFont(ofSize: 24,
                                                                                        weight: .bold)]))
                                                        
-        return PhotoViewModel(imagesString: [posterName],
+        return PhotoCardViewModel(imagesString: [posterName],
                               attributedText: attributedText,
                               textAlignment: .center)
     }

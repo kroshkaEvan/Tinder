@@ -8,29 +8,49 @@
 import UIKit
 
 class BottomButtonsControlsStackView: UIStackView {
-    private lazy var images = [Constants.Image.replay, Constants.Image.cross, Constants.Image.star, Constants.Image.hurt, Constants.Image.lightning]
-    
-    private lazy var buttonSubviews = self.images.map { (image) -> UIView in
+    lazy var refreshButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addStandartButtonWith(image: Constants.Image.replay?.withRenderingMode(.alwaysOriginal))
         return button
-    }
+    }()
+    
+    lazy var likeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.addStandartButtonWith(image: Constants.Image.hurt?.withRenderingMode(.alwaysOriginal))
+        return button
+    }()
+    
+    lazy var superLikeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.addStandartButtonWith(image: Constants.Image.star?.withRenderingMode(.alwaysOriginal))
+        return button
+    }()
+    
+    lazy var dislikeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.addStandartButtonWith(image: Constants.Image.cross?.withRenderingMode(.alwaysOriginal))
+        return button
+    }()
+    
+    lazy var thunderButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.addStandartButtonWith(image: Constants.Image.lightning?.withRenderingMode(.alwaysOriginal))
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addButtonSubviews()
+        setupLayout()
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func addButtonSubviews() {
-        buttonSubviews.forEach { someButton in
-            addArrangedSubview(someButton)
-        }
+    private func setupLayout() {
+        heightAnchor.constraint(equalToConstant: 80).isActive = true
         distribution = .fillEqually
-        heightAnchor.constraint(equalToConstant: 90).isActive = true
+        [refreshButton, dislikeButton, superLikeButton, likeButton, thunderButton].forEach { addArrangedSubview($0) }
     }
     
 }

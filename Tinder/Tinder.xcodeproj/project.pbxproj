@@ -14,10 +14,10 @@
 		BCA0088028551EB800C8B371 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA0087F28551EB800C8B371 /* User.swift */; };
 		BCC6FCD22848BFD500E6E8E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC6FCD12848BFD500E6E8E0 /* AppDelegate.swift */; };
 		BCC6FCD42848BFD500E6E8E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC6FCD32848BFD500E6E8E0 /* SceneDelegate.swift */; };
-		BCC6FCD62848BFD500E6E8E0 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC6FCD52848BFD500E6E8E0 /* HomeController.swift */; };
+		BCC6FCD62848BFD500E6E8E0 /* PhotoCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC6FCD52848BFD500E6E8E0 /* PhotoCardController.swift */; };
 		BCC6FCDB2848BFD900E6E8E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCC6FCDA2848BFD900E6E8E0 /* Assets.xcassets */; };
 		BCC6FCDE2848BFD900E6E8E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCC6FCDC2848BFD900E6E8E0 /* LaunchScreen.storyboard */; };
-		BCD3010E286B955A00D9C880 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD3010D286B955A00D9C880 /* PhotoViewModel.swift */; };
+		BCD3010E286B955A00D9C880 /* PhotoCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD3010D286B955A00D9C880 /* PhotoCardViewModel.swift */; };
 		BCD30110286C92D900D9C880 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD3010F286C92D900D9C880 /* Advertiser.swift */; };
 		BCE68ADC284A2AF200EBB5B6 /* Extensions + UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE68ADB284A2AF200EBB5B6 /* Extensions + UIView.swift */; };
 		BCE68ADE284E025C00EBB5B6 /* DownButtonsControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE68ADD284E025C00EBB5B6 /* DownButtonsControlsStackView.swift */; };
@@ -25,7 +25,9 @@
 		BCE68AF2284E39E100EBB5B6 /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE68AF1284E39E100EBB5B6 /* TopNavigationStackView.swift */; };
 		BCEC5B1B2891565E005CA649 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCEC5B1A2891565E005CA649 /* GoogleService-Info.plist */; };
 		BCEC5B1D28925074005CA649 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEC5B1C28925074005CA649 /* Bindable.swift */; };
-		BCF574312890485500C7B12C /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF574302890485500C7B12C /* RegisterViewModel.swift */; };
+		BCEC5B212896F090005CA649 /* Extension + UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEC5B202896F090005CA649 /* Extension + UIButton.swift */; };
+		BCEC5B24289713AA005CA649 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEC5B23289713AA005CA649 /* SettingsController.swift */; };
+		BCF574312890485500C7B12C /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF574302890485500C7B12C /* RegistrationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,11 +41,11 @@
 		BCC6FCCE2848BFD500E6E8E0 /* Tinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCC6FCD12848BFD500E6E8E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCC6FCD32848BFD500E6E8E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BCC6FCD52848BFD500E6E8E0 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		BCC6FCD52848BFD500E6E8E0 /* PhotoCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCardController.swift; sourceTree = "<group>"; };
 		BCC6FCDA2848BFD900E6E8E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BCC6FCDD2848BFD900E6E8E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BCC6FCDF2848BFD900E6E8E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BCD3010D286B955A00D9C880 /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
+		BCD3010D286B955A00D9C880 /* PhotoCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCardViewModel.swift; sourceTree = "<group>"; };
 		BCD3010F286C92D900D9C880 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		BCE68ADB284A2AF200EBB5B6 /* Extensions + UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions + UIView.swift"; sourceTree = "<group>"; };
 		BCE68ADD284E025C00EBB5B6 /* DownButtonsControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownButtonsControlsStackView.swift; sourceTree = "<group>"; };
@@ -51,7 +53,9 @@
 		BCE68AF1284E39E100EBB5B6 /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
 		BCEC5B1A2891565E005CA649 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BCEC5B1C28925074005CA649 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
-		BCF574302890485500C7B12C /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		BCEC5B202896F090005CA649 /* Extension + UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIButton.swift"; sourceTree = "<group>"; };
+		BCEC5B23289713AA005CA649 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		BCF574302890485500C7B12C /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,9 +117,8 @@
 		BCD30109286B93E900D9C880 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BCEC5B222897135B005CA649 /* ViewControllers */,
 				BCD3010A286B940500D9C880 /* OtherViews */,
-				BCC6FCD52848BFD500E6E8E0 /* HomeController.swift */,
-				BC54C3FF28784B140009B8F5 /* RegistrationController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -126,6 +129,7 @@
 				BCE68ADD284E025C00EBB5B6 /* DownButtonsControlsStackView.swift */,
 				BCE68AF1284E39E100EBB5B6 /* TopNavigationStackView.swift */,
 				BC7AB56A2850CFD700C3E2B5 /* PhotoView.swift */,
+				BCEC5B23289713AA005CA649 /* SettingsController.swift */,
 			);
 			path = OtherViews;
 			sourceTree = "<group>";
@@ -143,8 +147,8 @@
 		BCD3010C286B952300D9C880 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				BCD3010D286B955A00D9C880 /* PhotoViewModel.swift */,
-				BCF574302890485500C7B12C /* RegisterViewModel.swift */,
+				BCD3010D286B955A00D9C880 /* PhotoCardViewModel.swift */,
+				BCF574302890485500C7B12C /* RegistrationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -154,8 +158,18 @@
 			children = (
 				BCE68ADB284A2AF200EBB5B6 /* Extensions + UIView.swift */,
 				BC54C401287863A60009B8F5 /* RegistrationTextField.swift */,
+				BCEC5B202896F090005CA649 /* Extension + UIButton.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		BCEC5B222897135B005CA649 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BC54C3FF28784B140009B8F5 /* RegistrationController.swift */,
+				BCC6FCD52848BFD500E6E8E0 /* PhotoCardController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		C8C3A5CAE5EDB1111F28F9B8 /* Pods */ = {
@@ -291,20 +305,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCE68ADC284A2AF200EBB5B6 /* Extensions + UIView.swift in Sources */,
-				BCC6FCD62848BFD500E6E8E0 /* HomeController.swift in Sources */,
+				BCC6FCD62848BFD500E6E8E0 /* PhotoCardController.swift in Sources */,
 				BCD30110286C92D900D9C880 /* Advertiser.swift in Sources */,
+				BCEC5B24289713AA005CA649 /* SettingsController.swift in Sources */,
 				BC54C402287863A60009B8F5 /* RegistrationTextField.swift in Sources */,
 				BCE68ADE284E025C00EBB5B6 /* DownButtonsControlsStackView.swift in Sources */,
 				BCEC5B1D28925074005CA649 /* Bindable.swift in Sources */,
 				BCE68AF2284E39E100EBB5B6 /* TopNavigationStackView.swift in Sources */,
+				BCEC5B212896F090005CA649 /* Extension + UIButton.swift in Sources */,
 				BCC6FCD22848BFD500E6E8E0 /* AppDelegate.swift in Sources */,
 				BC54C40028784B140009B8F5 /* RegistrationController.swift in Sources */,
 				BCA0088028551EB800C8B371 /* User.swift in Sources */,
-				BCF574312890485500C7B12C /* RegisterViewModel.swift in Sources */,
+				BCF574312890485500C7B12C /* RegistrationViewModel.swift in Sources */,
 				BCC6FCD42848BFD500E6E8E0 /* SceneDelegate.swift in Sources */,
 				BCE68AF0284E279300EBB5B6 /* Constants.swift in Sources */,
 				BC7AB56B2850CFD700C3E2B5 /* PhotoView.swift in Sources */,
-				BCD3010E286B955A00D9C880 /* PhotoViewModel.swift in Sources */,
+				BCD3010E286B955A00D9C880 /* PhotoCardViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

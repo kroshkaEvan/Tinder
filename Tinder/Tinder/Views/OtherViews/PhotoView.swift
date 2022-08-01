@@ -6,14 +6,17 @@
 //
 
 import UIKit
+import SDWebImage
 
 class PhotoView: UIView {
     
-    var viewModel: PhotoViewModel? {
+    var viewModel: PhotoCardViewModel? {
         didSet {
             if let viewModel = viewModel {
                 let firstImage = viewModel.imagesString.first ?? ""
-                imageView.image = UIImage(named: firstImage)
+                if let url = URL(string: firstImage) {
+                    imageView.sd_setImage(with: url)
+                }
                 infoLabel.attributedText = viewModel.attributedText
                 infoLabel.textAlignment = viewModel.textAlignment
                 getCountImages(viewModel: viewModel)
@@ -38,7 +41,7 @@ class PhotoView: UIView {
         label.numberOfLines = 2
         return label
     }()
-    
+        
     private var imageIndex = 0
     
     private lazy var segmentedBarStackView: UIStackView = {
@@ -84,7 +87,7 @@ class PhotoView: UIView {
         self.bringSubviewToFront(segmentedBarStackView)
     }
     
-    private func getCountImages(viewModel: PhotoViewModel) {
+    private func getCountImages(viewModel: PhotoCardViewModel) {
         (0..<viewModel.imagesString.count).forEach { _ in
             let barView = UIView()
             barView.layer.cornerRadius = 5
@@ -99,8 +102,10 @@ class PhotoView: UIView {
     }
     
     private func setupImageIndexObserver() {
-        viewModel?.imageIndexObserver = { [weak self] (index, image) in
-            self?.imageView.image = image
+        viewModel?.imageIndexObserver = { [weak self] (index, imageURL) in
+            if let url = URL(string: imageURL ?? "") {
+                self?.imageView.sd_setImage(with: url)
+            }
             self?.segmentedBarStackView.arrangedSubviews.forEach { barView in
                 barView.backgroundColor = .white.withAlphaComponent(0.3)
             }
