@@ -33,5 +33,7 @@ class Constants {
     class Color {
         static let topGradienApp = UIColor.rgb(red: 240, green: 121, blue: 69)
         static let downGradienApp = UIColor.rgb(red: 229, green: 69, blue: 129)
+        static let blueButtonColor = UIColor.rgb(red: 65, green: 69, blue: 152)
+        static let pinkButtonColor = UIColor.rgb(red: 234, green: 72, blue: 187)
     }
 }

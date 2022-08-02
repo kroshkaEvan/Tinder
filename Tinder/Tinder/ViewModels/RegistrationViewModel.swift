@@ -13,6 +13,9 @@ import FirebaseFirestore
 typealias CompletionClosure = (Error?) -> Void
 
 class RegistrationViewModel {
+    
+    // MARK: - Public Properties
+    
     var userName: String? {
         didSet {
             checkFormValidity()
@@ -32,6 +35,8 @@ class RegistrationViewModel {
     var bindableImage = Bindable<UIImage>()
     var bindableIsFormValid = Bindable<Bool>()
     var bindableIsRegistering = Bindable<Bool>()
+    
+    // MARK: - Private Methods
     
     private func checkFormValidity() {
         let isFormValid = userName?.isEmpty == false && email?.isEmpty == false && password?.isEmpty == false
@@ -76,6 +81,8 @@ class RegistrationViewModel {
             completion(nil)
         }
     }
+    
+    // MARK: - Public Methods
     
     func performRegitration(completion: @escaping CompletionClosure) {
         bindableIsRegistering.value = true

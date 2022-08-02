@@ -10,6 +10,9 @@ import FirebaseFirestore
 import JGProgressHUD
 
 class PhotoCardController: UIViewController {
+    
+    // MARK: - Private properties
+
     private lazy var topButtonsStackView = TopNavigationStackView()
     
     private lazy var backgroundView: UIView = {
@@ -65,6 +68,8 @@ class PhotoCardController: UIViewController {
     
     private lazy var viewModel = [PhotoCardViewModel]()
 
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStackViewsLayout()
@@ -72,6 +77,8 @@ class PhotoCardController: UIViewController {
         addAllTargets()
         fetchUsersFromFirebase()
     }
+    
+    // MARK: - Private Methods
     
     private func addAllTargets() {
         topButtonsStackView.settingsButton.addTarget(self,
@@ -152,6 +159,8 @@ class PhotoCardController: UIViewController {
 //            self?.setupViewModel()
         }
     }
+    
+    // MARK: - Objc Methods
 
     @objc func didTapSettingButton() {
         let settingsVC = SettingsController()

@@ -8,6 +8,9 @@
 import UIKit
 
 class BottomButtonsControlsStackView: UIStackView {
+    
+    // MARK: - Public Properties
+
     lazy var refreshButton: UIButton = {
         let button = UIButton(type: .system)
         button.addStandartButtonWith(image: Constants.Image.replay?.withRenderingMode(.alwaysOriginal))
@@ -38,6 +41,8 @@ class BottomButtonsControlsStackView: UIStackView {
         return button
     }()
     
+    // MARK: - Initializers
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -45,8 +50,10 @@ class BottomButtonsControlsStackView: UIStackView {
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
+    }    
     
+    // MARK: - Private Methods
+
     private func setupLayout() {
         heightAnchor.constraint(equalToConstant: 80).isActive = true
         distribution = .fillEqually

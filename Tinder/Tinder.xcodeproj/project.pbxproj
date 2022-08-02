@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		24AA884DDF1EDB794598704D /* Pods_Tinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D39A2EF96591C7C1118F517 /* Pods_Tinder.framework */; };
+		BC2947E12897D5A300105E87 /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2947E02897D5A300105E87 /* SelectButton.swift */; };
+		BC294803289959AB00105E87 /* SelectPhotoButtonsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC294802289959AA00105E87 /* SelectPhotoButtonsStackView.swift */; };
 		BC54C40028784B140009B8F5 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC54C3FF28784B140009B8F5 /* RegistrationController.swift */; };
 		BC54C402287863A60009B8F5 /* RegistrationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC54C401287863A60009B8F5 /* RegistrationTextField.swift */; };
 		BC7AB56B2850CFD700C3E2B5 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7AB56A2850CFD700C3E2B5 /* PhotoView.swift */; };
@@ -34,6 +36,8 @@
 		266DADBAD158BC382498D123 /* Pods-Tinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinder.release.xcconfig"; path = "Target Support Files/Pods-Tinder/Pods-Tinder.release.xcconfig"; sourceTree = "<group>"; };
 		2D39A2EF96591C7C1118F517 /* Pods_Tinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76989CCE43A568D198EBC917 /* Pods-Tinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinder.debug.xcconfig"; path = "Target Support Files/Pods-Tinder/Pods-Tinder.debug.xcconfig"; sourceTree = "<group>"; };
+		BC2947E02897D5A300105E87 /* SelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
+		BC294802289959AA00105E87 /* SelectPhotoButtonsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoButtonsStackView.swift; sourceTree = "<group>"; };
 		BC54C3FF28784B140009B8F5 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		BC54C401287863A60009B8F5 /* RegistrationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTextField.swift; sourceTree = "<group>"; };
 		BC7AB56A2850CFD700C3E2B5 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
@@ -129,7 +133,8 @@
 				BCE68ADD284E025C00EBB5B6 /* DownButtonsControlsStackView.swift */,
 				BCE68AF1284E39E100EBB5B6 /* TopNavigationStackView.swift */,
 				BC7AB56A2850CFD700C3E2B5 /* PhotoView.swift */,
-				BCEC5B23289713AA005CA649 /* SettingsController.swift */,
+				BC2947E02897D5A300105E87 /* SelectButton.swift */,
+				BC294802289959AA00105E87 /* SelectPhotoButtonsStackView.swift */,
 			);
 			path = OtherViews;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 			children = (
 				BC54C3FF28784B140009B8F5 /* RegistrationController.swift */,
 				BCC6FCD52848BFD500E6E8E0 /* PhotoCardController.swift */,
+				BCEC5B23289713AA005CA649 /* SettingsController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -313,12 +319,14 @@
 				BCEC5B1D28925074005CA649 /* Bindable.swift in Sources */,
 				BCE68AF2284E39E100EBB5B6 /* TopNavigationStackView.swift in Sources */,
 				BCEC5B212896F090005CA649 /* Extension + UIButton.swift in Sources */,
+				BC2947E12897D5A300105E87 /* SelectButton.swift in Sources */,
 				BCC6FCD22848BFD500E6E8E0 /* AppDelegate.swift in Sources */,
 				BC54C40028784B140009B8F5 /* RegistrationController.swift in Sources */,
 				BCA0088028551EB800C8B371 /* User.swift in Sources */,
 				BCF574312890485500C7B12C /* RegistrationViewModel.swift in Sources */,
 				BCC6FCD42848BFD500E6E8E0 /* SceneDelegate.swift in Sources */,
 				BCE68AF0284E279300EBB5B6 /* Constants.swift in Sources */,
+				BC294803289959AB00105E87 /* SelectPhotoButtonsStackView.swift in Sources */,
 				BC7AB56B2850CFD700C3E2B5 /* PhotoView.swift in Sources */,
 				BCD3010E286B955A00D9C880 /* PhotoCardViewModel.swift in Sources */,
 			);

@@ -10,19 +10,12 @@ import JGProgressHUD
 
 class RegistrationController: UIViewController {
     
+    // MARK: - Private properties
+
     private let viewModel = RegistrationViewModel()
     
-    private lazy var selectPhotoButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Select Photo",
-                        for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 30,
-                                                    weight: .bold)
-        button.setTitleColor(.cyan, for: .normal)
-        button.backgroundColor = .white
-        button.imageView?.contentMode = .scaleAspectFill
-        button.layer.cornerRadius = 25
-        button.clipsToBounds = true
+    private lazy var selectPhotoButton: SelectButton = {
+        let button = SelectButton(cornerRadius: 25)
         let heightButton = view.frame.size.width - 40
         button.heightAnchor.constraint(equalToConstant: heightButton).isActive = true
         return button
@@ -77,7 +70,9 @@ class RegistrationController: UIViewController {
     }()
     
     private lazy var loadingHUD = JGProgressHUD(style: .dark)
-        
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewGradientLayer()
@@ -99,6 +94,8 @@ class RegistrationController: UIViewController {
         super.viewWillDisappear(animated)
 //        NotificationCenter.default.removeObserver(self)
     }
+    
+    // MARK: - Private Methods
     
     private func setupLayout() {
         view.addSubview(mainStackView)
@@ -186,6 +183,8 @@ class RegistrationController: UIViewController {
                                              action: #selector(didTapDismissKeyboard))
         view.addGestureRecognizer(gesture)
     }
+    
+    // MARK: - Objc Methods
     
     @objc private func didChangeText(field: UITextField) {
         switch field {

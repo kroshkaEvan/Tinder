@@ -13,6 +13,9 @@ protocol ProducesPhotoCardViewModel {
 }
 
 class PhotoCardViewModel {
+    
+    // MARK: - Public Properties
+
     let imagesString: [String]
     let attributedText: NSAttributedString
     let textAlignment: NSTextAlignment
@@ -26,11 +29,15 @@ class PhotoCardViewModel {
     
     var imageIndexObserver: ((Int, String?) -> ())?
     
+    // MARK: - Initializer
+    
     init(imagesString: [String], attributedText: NSAttributedString, textAlignment: NSTextAlignment) {
         self.imagesString = imagesString
         self.attributedText = attributedText
         self.textAlignment = textAlignment
     }
+    
+    // MARK: - Public Methods
     
     func goToNextPhoto() {
         imageIndex = min(imageIndex + 1, imagesString.count - 1)

@@ -10,6 +10,8 @@ import SDWebImage
 
 class PhotoView: UIView {
     
+    // MARK: - Public Properties
+    
     var viewModel: PhotoCardViewModel? {
         didSet {
             if let viewModel = viewModel {
@@ -41,6 +43,8 @@ class PhotoView: UIView {
         label.numberOfLines = 2
         return label
     }()
+    
+    // MARK: - Private Properties
         
     private var imageIndex = 0
     
@@ -50,6 +54,8 @@ class PhotoView: UIView {
         barStackView.spacing = 4
         return barStackView
     }()
+    
+    // MARK: - Initializers
         
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -64,6 +70,8 @@ class PhotoView: UIView {
     override func layoutSubviews() {
         setupImageGradienLayer()
     }
+    
+    // MARK: - Private Methods
     
     private func setupPhotoViewLayout() {
         [segmentedBarStackView ,imageView, infoLabel].forEach { addSubview($0) }
@@ -129,6 +137,8 @@ class PhotoView: UIView {
                                                          action: #selector(didSwipeImagesAction))
         addGestureRecognizer(swipeImagesGesture)
     }
+    
+    // MARK: - Objc Methods
     
     @objc private func didPanGestureAction(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
