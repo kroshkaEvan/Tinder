@@ -11,17 +11,17 @@ class SelectPhotoButtonsStackView: UIStackView {
     
     // MARK: - Public Properties
 
-    private lazy var firstSelectPhotoButton: SelectButton = {
+    lazy var firstSelectPhotoButton: SelectButton = {
         let button = SelectButton(cornerRadius: 10)
         return button
     }()
     
-    private lazy var secondSelectPhotoButton: SelectButton = {
+    lazy var secondSelectPhotoButton: SelectButton = {
         let button = SelectButton(cornerRadius: 10)
         return button
     }()
     
-    private lazy var thirdSelectPhotoButton: SelectButton = {
+    lazy var thirdSelectPhotoButton: SelectButton = {
         let button = SelectButton(cornerRadius: 10)
         return button
     }()

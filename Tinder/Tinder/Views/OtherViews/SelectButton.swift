@@ -42,7 +42,6 @@ class SelectButton: UIButton {
         super.layoutSubviews()
         backgroundColor = nil
         addGradienLayer()
-        addShadow()
     }
     
     override var isHighlighted: Bool {
@@ -69,16 +68,10 @@ class SelectButton: UIButton {
         layer.insertSublayer(gradientLayer, at: 0)
     }
     
-    private func addShadow() {
-        layer.shadowColor = shadowColor.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 3)
-        layer.shadowRadius = cornerRadius * 2
-        layer.shadowOpacity = 2.0
-        layer.cornerRadius = cornerRadius
-    }
-    
     private func addImage() {
-        imageView?.contentMode = .scaleAspectFit
+        imageView?.contentMode = .scaleAspectFill
+        layer.cornerRadius = cornerRadius
+        clipsToBounds = true
         setImage(UIImage(named: "camera"), for: .normal)
     }
 }

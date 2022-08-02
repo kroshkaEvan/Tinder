@@ -43,12 +43,13 @@ class SettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UIView()
-        header.backgroundColor = .lightGray
+        header.backgroundColor = .lightGray.withAlphaComponent(0.15)
         [mainButtonsStackView].forEach { header.addSubview($0) }
+        let padding = CGFloat(5)
         mainButtonsStackView.anchor(top: header.topAnchor, leading: header.leadingAnchor,
                                     bottom: header.bottomAnchor, trailing: header.trailingAnchor,
-                                    padding: .init(top: 5, left: 5,
-                                                   bottom: 5, right: 5))
+                                    padding: .init(top: padding, left: padding,
+                                                   bottom: padding, right: padding))
         return header
     }
     
@@ -75,6 +76,16 @@ class SettingsController: UITableViewController {
                             target: self,
                             action: #selector(didTapLogout))
         ]
+        [firstButtonsStackView.firstSelectPhotoButton,
+         firstButtonsStackView.secondSelectPhotoButton,
+         firstButtonsStackView.thirdSelectPhotoButton,
+         secondButtonsStackView.firstSelectPhotoButton,
+         secondButtonsStackView.secondSelectPhotoButton,
+         secondButtonsStackView.thirdSelectPhotoButton].forEach { [weak self] selectButton in
+            selectButton.addTarget(self,
+                                   action: #selector(didTapSelectPhoto),
+                                   for: .touchUpInside)
+        }
     }
     
     // MARK: - Objc Methods
@@ -90,5 +101,28 @@ class SettingsController: UITableViewController {
     @objc private func didTapLogout() {
         dismiss(animated: true)
     }
-
+    
+    @objc private func didTapSelectPhoto(button: UIButton) {
+        let imagePicker = SettingsImagePicker()
+        imagePicker.delegate = self
+        imagePicker.imageButton = button
+        present(imagePicker, animated: true)
+    }
 }
+
+extension SettingsController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let selectedPhoto = info[.originalImage] as? UIImage else {return}
+        let imageButton = (picker as? SettingsImagePicker)?.imageButton
+        imageButton?.setImage(selectedPhoto.withRenderingMode(.alwaysOriginal),
+                                                                for: .normal)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
+    }
+}
+
