@@ -18,6 +18,7 @@ class Constants {
         static let lightning = UIImage(named: "lightning")
         static let star = UIImage(named: "star")
         static let chat = UIImage(named: "chat")
+        static let camera = UIImage(named: "camera")
     }
     
     class Photo {

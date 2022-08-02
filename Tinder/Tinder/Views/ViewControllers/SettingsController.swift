@@ -42,7 +42,7 @@ class SettingsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLayout()
+        setupUI()
         addAllTargets()
     }
     
@@ -50,19 +50,63 @@ class SettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let height = view.frame.size.width * 0.85
-        return height
+        if section == 0 {
+            return height
+        }
+        return 30
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return headerView
+        let headerLabel = HeaderLabel()
+        switch section {
+        case 0:
+            return headerView
+        case 1:
+            headerLabel.text = "Name"
+            return headerLabel
+        case 2:
+            headerLabel.text = "Age"
+            return headerLabel
+        case 3:
+            headerLabel.text = "Profession"
+            return headerLabel
+        default:
+            headerLabel.text = "Bio"
+            return headerLabel
+        }
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 5
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return section == 0 ? 0 : 1
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = SettingsCell(style: .default,
+                                reuseIdentifier: nil)
+        switch indexPath.section {
+        case 1:
+            cell.textField.placeholder = "Enter name"
+        case 2:
+            cell.textField.placeholder = "Enter age"
+        case 3:
+            cell.textField.placeholder = "Enter profession"
+        default:
+            cell.textField.placeholder = "Enter bio"
+        }
+        return cell
     }
     
     // MARK: - Private Methods
     
-    private func setupLayout() {
+    private func setupUI() {
         navigationItem.title = "Settings"
         navigationController?.navigationBar.prefersLargeTitles = true
         tableView.tableFooterView = UIView()
+        tableView.keyboardDismissMode = .interactive
     }
     
     private func addAllTargets() {

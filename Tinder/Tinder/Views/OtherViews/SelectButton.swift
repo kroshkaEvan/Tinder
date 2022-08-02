@@ -72,6 +72,6 @@ class SelectButton: UIButton {
         imageView?.contentMode = .scaleAspectFill
         layer.cornerRadius = cornerRadius
         clipsToBounds = true
-        setImage(UIImage(named: "camera"), for: .normal)
+        setImage(Constants.Image.camera, for: .normal)
     }
 }
