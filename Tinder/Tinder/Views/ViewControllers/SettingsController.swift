@@ -26,6 +26,18 @@ class SettingsController: UITableViewController {
         return stackView
     }()
     
+    private lazy var headerView: UIView = {
+        let header = UIView()
+        header.backgroundColor = .lightGray.withAlphaComponent(0.15)
+        [mainButtonsStackView].forEach { header.addSubview($0) }
+        let padding = CGFloat(5)
+        mainButtonsStackView.anchor(top: header.topAnchor, leading: header.leadingAnchor,
+                                    bottom: header.bottomAnchor, trailing: header.trailingAnchor,
+                                    padding: .init(top: padding, left: padding,
+                                                   bottom: padding, right: padding))
+        return header
+    }()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -42,15 +54,7 @@ class SettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView()
-        header.backgroundColor = .lightGray.withAlphaComponent(0.15)
-        [mainButtonsStackView].forEach { header.addSubview($0) }
-        let padding = CGFloat(5)
-        mainButtonsStackView.anchor(top: header.topAnchor, leading: header.leadingAnchor,
-                                    bottom: header.bottomAnchor, trailing: header.trailingAnchor,
-                                    padding: .init(top: padding, left: padding,
-                                                   bottom: padding, right: padding))
-        return header
+        return headerView
     }
     
     // MARK: - Private Methods
