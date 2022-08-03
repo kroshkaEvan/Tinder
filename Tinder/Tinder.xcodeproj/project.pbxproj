@@ -14,6 +14,7 @@
 		BC2948072899AAE100105E87 /* HeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2948062899AAE000105E87 /* HeaderLabel.swift */; };
 		BC2948092899ABCB00105E87 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2948082899ABCB00105E87 /* SettingsCell.swift */; };
 		BC29480B2899AE1C00105E87 /* SettingsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC29480A2899AE1C00105E87 /* SettingsTextField.swift */; };
+		BC29480D289B01F200105E87 /* DetailSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC29480C289B01F200105E87 /* DetailSettingsViewController.swift */; };
 		BC54C40028784B140009B8F5 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC54C3FF28784B140009B8F5 /* RegistrationController.swift */; };
 		BC54C402287863A60009B8F5 /* RegistrationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC54C401287863A60009B8F5 /* RegistrationTextField.swift */; };
 		BC7AB56B2850CFD700C3E2B5 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7AB56A2850CFD700C3E2B5 /* PhotoView.swift */; };
@@ -46,6 +47,7 @@
 		BC2948062899AAE000105E87 /* HeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderLabel.swift; sourceTree = "<group>"; };
 		BC2948082899ABCB00105E87 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		BC29480A2899AE1C00105E87 /* SettingsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextField.swift; sourceTree = "<group>"; };
+		BC29480C289B01F200105E87 /* DetailSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSettingsViewController.swift; sourceTree = "<group>"; };
 		BC54C3FF28784B140009B8F5 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		BC54C401287863A60009B8F5 /* RegistrationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTextField.swift; sourceTree = "<group>"; };
 		BC7AB56A2850CFD700C3E2B5 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				BC54C3FF28784B140009B8F5 /* RegistrationController.swift */,
 				BCC6FCD52848BFD500E6E8E0 /* PhotoCardController.swift */,
 				BCEC5B23289713AA005CA649 /* SettingsController.swift */,
+				BC29480C289B01F200105E87 /* DetailSettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				BC29480B2899AE1C00105E87 /* SettingsTextField.swift in Sources */,
 				BCC6FCD22848BFD500E6E8E0 /* AppDelegate.swift in Sources */,
 				BC54C40028784B140009B8F5 /* RegistrationController.swift in Sources */,
+				BC29480D289B01F200105E87 /* DetailSettingsViewController.swift in Sources */,
 				BCA0088028551EB800C8B371 /* User.swift in Sources */,
 				BCF574312890485500C7B12C /* RegistrationViewModel.swift in Sources */,
 				BCC6FCD42848BFD500E6E8E0 /* SceneDelegate.swift in Sources */,

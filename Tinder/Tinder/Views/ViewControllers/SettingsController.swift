@@ -32,7 +32,7 @@ class SettingsController: UITableViewController {
     
     private lazy var headerView: UIView = {
         let header = UIView()
-        header.backgroundColor = .lightGray.withAlphaComponent(0.15)
+        header.backgroundColor = .lightGray.withAlphaComponent(0.2)
         [mainButtonsStackView].forEach { header.addSubview($0) }
         let padding = CGFloat(5)
         mainButtonsStackView.anchor(top: header.topAnchor, leading: header.leadingAnchor,
@@ -96,15 +96,12 @@ class SettingsController: UITableViewController {
                                 reuseIdentifier: nil)
         switch indexPath.section {
         case 1:
-            cell.textField.placeholder = "Enter name"
             cell.textField.text = currentUser?.name
         case 2:
-            cell.textField.placeholder = "Enter age"
             if let age = currentUser?.age {
                 cell.textField.text = String(age)
             }
         case 3:
-            cell.textField.placeholder = "Enter profession"
             cell.textField.text = currentUser?.profession
         default:
             cell.textField.placeholder = "Enter bio"
@@ -112,12 +109,37 @@ class SettingsController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let detailVC = DetailSettingsViewController()
+        let navigationVc = UINavigationController(rootViewController: detailVC)
+        if let sheet = navigationVc.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        switch indexPath.section {
+        case 1:
+            detailVC.textField.placeholder = "Enter name"
+            detailVC.textField.text = currentUser?.name
+        case 2:
+            detailVC.textField.placeholder = "Enter age"
+            if let age = currentUser?.age {
+                detailVC.textField.text = String(age)
+            }
+        case 3:
+            detailVC.textField.placeholder = "Enter profession"
+            detailVC.textField.text = currentUser?.profession
+        default:
+            detailVC.textField.placeholder = "Enter bio"
+        }
+        self.present(navigationVc, animated: true)
+    }
+    
     // MARK: - Private Methods
     
     private func setupUI() {
         navigationItem.title = "Settings"
         navigationController?.navigationBar.prefersLargeTitles = true
-        tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        tableView.backgroundColor = .white.withAlphaComponent(0.9)
         tableView.tableFooterView = UIView()
         tableView.keyboardDismissMode = .interactive
     }
