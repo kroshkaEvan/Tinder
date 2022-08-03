@@ -13,14 +13,14 @@ class SettingsTextField: UITextField {
         return .init(width: 0,
                      height: 45)
     }
-    
+
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: 25,
+        return bounds.insetBy(dx: 40,
                               dy: 0)
     }
-    
+
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: 25,
+        return bounds.insetBy(dx: 40,
                               dy: 0)
     }
 

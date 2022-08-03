@@ -9,7 +9,7 @@ import UIKit
 
 class SettingsCell: UITableViewCell {
     
-    lazy var textField: SettingsTextField = {
+    lazy var textField: UITextField = {
         let textField = SettingsTextField()
         return textField
     }()

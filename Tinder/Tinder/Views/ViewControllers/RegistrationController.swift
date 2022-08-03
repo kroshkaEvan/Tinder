@@ -22,28 +22,25 @@ class RegistrationController: UIViewController {
     }()
     
     private lazy var userNameTextField: RegistrationTextField = {
-        let textField = RegistrationTextField(padding: 24)
+        let textField = RegistrationTextField(padding: 24,
+                                              height: 50)
         textField.placeholder = "Enter your name"
-        textField.backgroundColor = .white
-        textField.layer.cornerRadius = 25
         return textField
     }()
     
     private lazy var emailAddressTextField: RegistrationTextField = {
-        let textField = RegistrationTextField(padding: 24)
+        let textField = RegistrationTextField(padding: 24,
+                                              height: 50)
         textField.placeholder = "Enter email"
         textField.keyboardType = .emailAddress
-        textField.backgroundColor = .white
-        textField.layer.cornerRadius = 25
         return textField
     }()
     
     private lazy var passwordTextField: RegistrationTextField = {
-        let textField = RegistrationTextField(padding: 24)
+        let textField = RegistrationTextField(padding: 24,
+                                              height: 50)
         textField.placeholder = "Enter your password"
         textField.isSecureTextEntry = true
-        textField.backgroundColor = .white
-        textField.layer.cornerRadius = 25
         return textField
     }()
     

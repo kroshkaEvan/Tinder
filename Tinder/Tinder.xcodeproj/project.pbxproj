@@ -147,6 +147,7 @@
 				BC2948062899AAE000105E87 /* HeaderLabel.swift */,
 				BC2948082899ABCB00105E87 /* SettingsCell.swift */,
 				BC29480A2899AE1C00105E87 /* SettingsTextField.swift */,
+				BC54C401287863A60009B8F5 /* RegistrationTextField.swift */,
 			);
 			path = OtherViews;
 			sourceTree = "<group>";
@@ -174,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				BCE68ADB284A2AF200EBB5B6 /* Extensions + UIView.swift */,
-				BC54C401287863A60009B8F5 /* RegistrationTextField.swift */,
 				BCEC5B202896F090005CA649 /* Extension + UIButton.swift */,
 			);
 			path = Extensions;

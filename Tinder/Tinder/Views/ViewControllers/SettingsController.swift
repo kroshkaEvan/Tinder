@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import FirebaseAuth
+import JGProgressHUD
+import SDWebImage
 
 class SettingsController: UITableViewController {
     
@@ -38,12 +42,15 @@ class SettingsController: UITableViewController {
         return header
     }()
     
+    private var currentUser: User?
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         addAllTargets()
+        fetchCurrentUser()
     }
     
     // MARK: - Initializers
@@ -90,10 +97,15 @@ class SettingsController: UITableViewController {
         switch indexPath.section {
         case 1:
             cell.textField.placeholder = "Enter name"
+            cell.textField.text = currentUser?.name
         case 2:
             cell.textField.placeholder = "Enter age"
+            if let age = currentUser?.age {
+                cell.textField.text = String(age)
+            }
         case 3:
             cell.textField.placeholder = "Enter profession"
+            cell.textField.text = currentUser?.profession
         default:
             cell.textField.placeholder = "Enter bio"
         }
@@ -105,6 +117,7 @@ class SettingsController: UITableViewController {
     private func setupUI() {
         navigationItem.title = "Settings"
         navigationController?.navigationBar.prefersLargeTitles = true
+        tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         tableView.tableFooterView = UIView()
         tableView.keyboardDismissMode = .interactive
     }
@@ -133,6 +146,29 @@ class SettingsController: UITableViewController {
             selectButton.addTarget(self,
                                    action: #selector(didTapSelectPhoto),
                                    for: .touchUpInside)
+        }
+    }
+        
+    private func fetchCurrentUser() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            guard let dictionary = snapshot?.data() else { return }
+            self.currentUser = User(dictionary: dictionary)
+            self.loadUserPhotos()
+            
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func loadUserPhotos() {
+        guard let imageURL = currentUser?.imagesURL,
+              let url = URL(string: imageURL) else { return }
+        SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
+            self.firstButtonsStackView.firstSelectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
     }
     
@@ -166,7 +202,7 @@ extension SettingsController: UIImagePickerControllerDelegate, UINavigationContr
         let imageButton = (picker as? SettingsImagePicker)?.imageButton
         imageButton?.setImage(selectedPhoto.withRenderingMode(.alwaysOriginal),
                                                                 for: .normal)
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
