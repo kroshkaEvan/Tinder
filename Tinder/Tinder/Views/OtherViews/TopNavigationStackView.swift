@@ -11,13 +11,6 @@ class TopNavigationStackView: UIStackView {
     
     // MARK: - Public Properties
     
-    lazy var chatButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(Constants.Image.chat?.withRenderingMode(.alwaysOriginal),
-                        for: .normal)
-        return button
-    }()
-    
     lazy var settingsButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(Constants.Image.person?.withRenderingMode(.alwaysOriginal),
@@ -29,6 +22,7 @@ class TopNavigationStackView: UIStackView {
         let button = UIButton(type: .system)
         button.setImage(Constants.Image.fire?.withRenderingMode(.alwaysOriginal),
                         for: .normal)
+        button.isUserInteractionEnabled = false
         return button
     }()
     
@@ -47,7 +41,7 @@ class TopNavigationStackView: UIStackView {
     
     private func setupStackViewLayout() {
         distribution = .equalCentering
-        [settingsButton, fireButton, chatButton].forEach { addArrangedSubview($0) }
+        [settingsButton, fireButton].forEach { addArrangedSubview($0) }
         heightAnchor.constraint(equalToConstant: 80).isActive = true
         isLayoutMarginsRelativeArrangement = true
         layoutMargins = .init(top: 0, left: 25,

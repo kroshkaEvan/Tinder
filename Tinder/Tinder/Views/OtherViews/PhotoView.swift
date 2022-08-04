@@ -90,7 +90,7 @@ class PhotoView: UIView {
                          bottom: self.bottomAnchor,
                          trailing: self.trailingAnchor,
                          padding: .init(top: 0, left: 20,
-                                        bottom: 20, right: 20))
+                                        bottom: 80, right: 20))
         self.bringSubviewToFront(infoLabel)
         self.bringSubviewToFront(segmentedBarStackView)
     }
@@ -124,7 +124,7 @@ class PhotoView: UIView {
     private func setupImageGradienLayer() {
         let gradienLayer = CAGradientLayer()
         gradienLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradienLayer.locations = [0.5, 1.2]
+        gradienLayer.locations = [0.4, 1.1]
         gradienLayer.frame = self.frame
         imageView.layer.addSublayer(gradienLayer)
     }

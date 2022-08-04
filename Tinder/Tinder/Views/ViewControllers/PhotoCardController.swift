@@ -12,8 +12,6 @@ import JGProgressHUD
 class PhotoCardController: UIViewController {
     
     // MARK: - Private properties
-
-    private lazy var topButtonsStackView = TopNavigationStackView()
     
     private lazy var backgroundView: UIView = {
         let view = UIView()
@@ -23,9 +21,7 @@ class PhotoCardController: UIViewController {
     private lazy var bottomButtonsStackView = BottomButtonsControlsStackView()
     
     private lazy var mainStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [topButtonsStackView,
-                                                       backgroundView,
-                                                       bottomButtonsStackView])
+        let stackView = UIStackView(arrangedSubviews: [backgroundView])
         stackView.axis = .vertical
         return stackView
     }()
@@ -38,7 +34,7 @@ class PhotoCardController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupStackViewsLayout()
+        setupLayout()
         addAllTargets()
         fetchUsersFromFirebase()
     }
@@ -46,9 +42,10 @@ class PhotoCardController: UIViewController {
     // MARK: - Private Methods
     
     private func addAllTargets() {
-        topButtonsStackView.settingsButton.addTarget(self,
-                                                     action: #selector(didTapSettingButton),
-                                                     for: .touchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "person"),
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(didTapSettingsButton))
         bottomButtonsStackView.refreshButton.addTarget(self,
                                                        action: #selector(didTapRefreshButton),
                                                        for: .touchUpInside)
@@ -66,25 +63,34 @@ class PhotoCardController: UIViewController {
                                                        for: .touchUpInside)
     }
     
-    private func setupStackViewsLayout() {
+    private func setupLayout() {
         view.addSubview(mainStackView)
         view.backgroundColor = .white
-        mainStackView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
-                             leading: view.leadingAnchor,
-                             bottom: view.safeAreaLayoutGuide.bottomAnchor,
-                             trailing: view.trailingAnchor)
+        mainStackView.fillSuperview()
         mainStackView.bringSubviewToFront(backgroundView)
         mainStackView.isLayoutMarginsRelativeArrangement = true
-        mainStackView.layoutMargins = .init(top: 0, left: 5,
+        mainStackView.layoutMargins = .init(top: 10, left: 5,
                                             bottom: 0, right: 5)
+        backgroundView.addSubview(bottomButtonsStackView)
+        bottomButtonsStackView.anchor(top: nil,
+                                      leading: view.leadingAnchor,
+                                      bottom: backgroundView.bottomAnchor,
+                                      trailing: view.trailingAnchor,
+                                      padding: .init(top: 0, left: 0,
+                                                     bottom: 20, right: 0))
     }
     
     private func setupViewModel(user: User) {
         let view = PhotoView(frame: .zero)
         view.viewModel = user.getPhotoViewModel()
         backgroundView.addSubview(view)
+        view.anchor(top: backgroundView.topAnchor,
+                    leading: backgroundView.leadingAnchor,
+                    bottom: backgroundView.bottomAnchor,
+                    trailing: backgroundView.trailingAnchor,
+                    padding: .init(top: 0, left: 0,
+                                   bottom: 20, right: 0))
         backgroundView.sendSubviewToBack(view)
-        view.fillSuperview()
     }
 
     private func fetchUsersFromFirebase() {
@@ -109,13 +115,12 @@ class PhotoCardController: UIViewController {
                 self?.lastFetchedUser = user
                 self?.setupViewModel(user: user)
             })
-//            self?.setupViewModel()
         }
     }
     
     // MARK: - Objc Methods
 
-    @objc func didTapSettingButton() {
+    @objc func didTapSettingsButton() {
         let settingsVC = SettingsController()
         let navigationVC = UINavigationController(rootViewController: settingsVC)
         navigationVC.modalPresentationStyle = .fullScreen

@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        db.settings = settings
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = PhotoCardController()
+        window?.rootViewController = MainTabBarController()
         window?.makeKeyAndVisible()
     }
 }

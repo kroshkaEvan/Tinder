@@ -15,6 +15,8 @@
 		BC2948092899ABCB00105E87 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2948082899ABCB00105E87 /* SettingsCell.swift */; };
 		BC29480B2899AE1C00105E87 /* SettingsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC29480A2899AE1C00105E87 /* SettingsTextField.swift */; };
 		BC29480D289B01F200105E87 /* DetailSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC29480C289B01F200105E87 /* DetailSettingsViewController.swift */; };
+		BC545D2B289C7764007A2605 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC545D2A289C7764007A2605 /* MainTabBarController.swift */; };
+		BC545D2D289C77CB007A2605 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC545D2C289C77CB007A2605 /* ChatController.swift */; };
 		BC54C40028784B140009B8F5 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC54C3FF28784B140009B8F5 /* RegistrationController.swift */; };
 		BC54C402287863A60009B8F5 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC54C401287863A60009B8F5 /* CustomTextField.swift */; };
 		BC7AB56B2850CFD700C3E2B5 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7AB56A2850CFD700C3E2B5 /* PhotoView.swift */; };
@@ -48,6 +50,8 @@
 		BC2948082899ABCB00105E87 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		BC29480A2899AE1C00105E87 /* SettingsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextField.swift; sourceTree = "<group>"; };
 		BC29480C289B01F200105E87 /* DetailSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSettingsViewController.swift; sourceTree = "<group>"; };
+		BC545D2A289C7764007A2605 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		BC545D2C289C77CB007A2605 /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		BC54C3FF28784B140009B8F5 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		BC54C401287863A60009B8F5 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		BC7AB56A2850CFD700C3E2B5 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
@@ -189,6 +193,8 @@
 				BCC6FCD52848BFD500E6E8E0 /* PhotoCardController.swift */,
 				BCEC5B23289713AA005CA649 /* SettingsController.swift */,
 				BC29480C289B01F200105E87 /* DetailSettingsViewController.swift */,
+				BC545D2A289C7764007A2605 /* MainTabBarController.swift */,
+				BC545D2C289C77CB007A2605 /* ChatController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -327,10 +333,12 @@
 			files = (
 				BCE68ADC284A2AF200EBB5B6 /* Extensions + UIView.swift in Sources */,
 				BCC6FCD62848BFD500E6E8E0 /* PhotoCardController.swift in Sources */,
+				BC545D2B289C7764007A2605 /* MainTabBarController.swift in Sources */,
 				BCD30110286C92D900D9C880 /* Advertiser.swift in Sources */,
 				BCEC5B24289713AA005CA649 /* SettingsController.swift in Sources */,
 				BC54C402287863A60009B8F5 /* CustomTextField.swift in Sources */,
 				BCE68ADE284E025C00EBB5B6 /* DownButtonsControlsStackView.swift in Sources */,
+				BC545D2D289C77CB007A2605 /* ChatController.swift in Sources */,
 				BCEC5B1D28925074005CA649 /* Bindable.swift in Sources */,
 				BC2948072899AAE100105E87 /* HeaderLabel.swift in Sources */,
 				BCE68AF2284E39E100EBB5B6 /* TopNavigationStackView.swift in Sources */,
