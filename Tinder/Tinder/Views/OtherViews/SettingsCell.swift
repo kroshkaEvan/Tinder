@@ -11,6 +11,7 @@ class SettingsCell: UITableViewCell {
     
     lazy var textField: UITextField = {
         let textField = SettingsTextField()
+        textField.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         return textField
     }()
     

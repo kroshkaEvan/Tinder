@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RegistrationTextField: UITextField {
+class CustomTextField: UITextField {
     
     let padding: CGFloat
     let height: CGFloat
@@ -18,6 +18,7 @@ class RegistrationTextField: UITextField {
         super.init(frame: .zero)
         layer.cornerRadius = height / 2
         backgroundColor = .white
+        heightAnchor.constraint(equalToConstant: height).isActive = true
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {

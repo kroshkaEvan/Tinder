@@ -6,21 +6,29 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import FirebaseAuth
 
 class DetailSettingsViewController: UIViewController {
     
-    lazy var textField: RegistrationTextField = {
-        let textField = RegistrationTextField(padding: 24,
+    lazy var textField: CustomTextField = {
+        let textField = CustomTextField(padding: 24,
                                               height: 50)
         textField.font = .systemFont(ofSize: 35,
                                      weight: .semibold)
         return textField
     }()
     
+    var currentUser: User?
+    var section: Int? 
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
         setupNavigationBar()
+        textField.addTarget(self,
+                            action: #selector(setInfo),
+                            for: .editingChanged)
     }
     
     private func setupLayout() {
@@ -35,18 +43,44 @@ class DetailSettingsViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
                                                             target: self,
                                                             action: #selector(didTapSave))
         navigationItem.rightBarButtonItem?.tintColor = .white
-//        UIBarButtonItem(title: "Save",
-//                                                            style: .plain,
-//                                                            target: self,
-//                                                            action: #selector(didTapSave))
+    }
+        
+    @objc private func didTapSave() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let documentData = ["userName" : currentUser?.name ?? "",
+                            "uid" : currentUser?.uid ?? "",
+                            "imagesURL" : currentUser?.imagesURL ?? "",
+                            "age" : currentUser?.age ?? 18,
+                            "profession" : currentUser?.profession ?? "",
+                            "bio" : currentUser?.bio ?? ""] as [String : Any]
+        Firestore.firestore().collection("users").document(uid).setData(documentData) { (error) in
+            if let error = error {
+                print(error)
+                return
+            }
+        }
+        self.dismiss(animated: true)
     }
     
-    @objc private func didTapSave() {
-        dismiss(animated: true)
+    @objc func setInfo() {
+        DispatchQueue.main.async {
+            switch self.section {
+            case 1:
+                self.currentUser?.name = self.textField.text
+            case 2:
+                self.currentUser?.age = Int(self.textField.text ?? "18")
+            case 3:
+                self.currentUser?.profession = self.textField.text
+            case 4:
+                self.currentUser?.bio = self.textField.text
+            default:
+                return
+            }
+        }
     }
 
 }

@@ -14,3 +14,9 @@ extension UIButton {
         contentMode = .scaleAspectFill
     }
 }
+
+extension UIEdgeInsets {
+   func apply(_ rect: CGRect) -> CGRect {
+      return rect.inset(by: self)
+   }
+}

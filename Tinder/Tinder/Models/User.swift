@@ -14,6 +14,7 @@ struct User: ProducesPhotoCardViewModel {
     var profession: String?
     var imagesURL: String?
     var uid: String?
+    var bio: String?
     
     init(dictionary: [String : Any]) {
         self.name = dictionary["userName"] as? String ?? ""
@@ -21,6 +22,7 @@ struct User: ProducesPhotoCardViewModel {
         self.profession = dictionary["profession"] as? String ?? ""
         self.imagesURL = dictionary["imagesURL"] as? String ?? ""
         self.uid = dictionary["uid"] as? String ?? ""
+        self.bio = dictionary["bio"] as? String ?? ""
     }
     
     func getPhotoViewModel() -> PhotoCardViewModel{

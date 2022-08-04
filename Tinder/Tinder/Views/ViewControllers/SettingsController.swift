@@ -42,7 +42,7 @@ class SettingsController: UITableViewController {
         return header
     }()
     
-    private var currentUser: User?
+    var currentUser: User?
     
     // MARK: - Lifecycle
     
@@ -60,11 +60,13 @@ class SettingsController: UITableViewController {
         if section == 0 {
             return height
         }
-        return 30
+        return 25
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerLabel = HeaderLabel()
+        headerLabel.textInsets = .init(top: 0, left: 40, bottom: 10, right: 0)
+        headerLabel.font = UIFont.systemFont(ofSize: 20, weight: .ultraLight)
         switch section {
         case 0:
             return headerView
@@ -96,13 +98,19 @@ class SettingsController: UITableViewController {
                                 reuseIdentifier: nil)
         switch indexPath.section {
         case 1:
+            cell.textField.placeholder = "Enter name"
             cell.textField.text = currentUser?.name
         case 2:
+            cell.textField.placeholder = "Enter age"
             if let age = currentUser?.age {
                 cell.textField.text = String(age)
             }
         case 3:
+            cell.textField.placeholder = "Enter profession"
             cell.textField.text = currentUser?.profession
+        case 4:
+            cell.textField.placeholder = "Enter bio"
+            cell.textField.text = currentUser?.bio
         default:
             cell.textField.placeholder = "Enter bio"
         }
@@ -116,7 +124,8 @@ class SettingsController: UITableViewController {
         if let sheet = navigationVc.sheetPresentationController {
             sheet.detents = [.medium()]
         }
-        switch indexPath.section {
+        let section = indexPath.section
+        switch section {
         case 1:
             detailVC.textField.placeholder = "Enter name"
             detailVC.textField.text = currentUser?.name
@@ -128,9 +137,15 @@ class SettingsController: UITableViewController {
         case 3:
             detailVC.textField.placeholder = "Enter profession"
             detailVC.textField.text = currentUser?.profession
+        case 4:
+            detailVC.textField.placeholder = "Enter bio"
+            detailVC.textField.text = currentUser?.bio
         default:
             detailVC.textField.placeholder = "Enter bio"
         }
+        detailVC.currentUser = currentUser
+        detailVC.section = section
+        detailVC.setInfo()
         self.present(navigationVc, animated: true)
     }
     
@@ -145,20 +160,10 @@ class SettingsController: UITableViewController {
     }
     
     private func addAllTargets() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back",
-                                                           style: .plain,
-                                                           target: self,
-                                                           action: #selector(didTapBack))
-        navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(title: "Save",
-                            style: .plain,
-                            target: self,
-                            action: #selector(didTapSave)),
-            UIBarButtonItem(title: "Logout",
-                            style: .plain,
-                            target: self,
-                            action: #selector(didTapLogout))
-        ]
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                            target: self,
+                                                            action: #selector(didTapBack))
+        
         [firstButtonsStackView.firstSelectPhotoButton,
          firstButtonsStackView.secondSelectPhotoButton,
          firstButtonsStackView.thirdSelectPhotoButton,
@@ -171,7 +176,7 @@ class SettingsController: UITableViewController {
         }
     }
         
-    private func fetchCurrentUser() {
+    func fetchCurrentUser() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, error) in
             if let error = error {
@@ -181,7 +186,6 @@ class SettingsController: UITableViewController {
             guard let dictionary = snapshot?.data() else { return }
             self.currentUser = User(dictionary: dictionary)
             self.loadUserPhotos()
-            
             self.tableView.reloadData()
         }
     }
@@ -197,14 +201,6 @@ class SettingsController: UITableViewController {
     // MARK: - Objc Methods
     
     @objc private func didTapBack() {
-        dismiss(animated: true)
-    }
-    
-    @objc private func didTapSave() {
-        dismiss(animated: true)
-    }
-    
-    @objc private func didTapLogout() {
         dismiss(animated: true)
     }
     

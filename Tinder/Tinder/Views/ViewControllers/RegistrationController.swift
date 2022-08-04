@@ -21,23 +21,23 @@ class RegistrationController: UIViewController {
         return button
     }()
     
-    private lazy var userNameTextField: RegistrationTextField = {
-        let textField = RegistrationTextField(padding: 24,
+    private lazy var userNameTextField: CustomTextField = {
+        let textField = CustomTextField(padding: 24,
                                               height: 50)
         textField.placeholder = "Enter your name"
         return textField
     }()
     
-    private lazy var emailAddressTextField: RegistrationTextField = {
-        let textField = RegistrationTextField(padding: 24,
+    private lazy var emailAddressTextField: CustomTextField = {
+        let textField = CustomTextField(padding: 24,
                                               height: 50)
         textField.placeholder = "Enter email"
         textField.keyboardType = .emailAddress
         return textField
     }()
     
-    private lazy var passwordTextField: RegistrationTextField = {
-        let textField = RegistrationTextField(padding: 24,
+    private lazy var passwordTextField: CustomTextField = {
+        let textField = CustomTextField(padding: 24,
                                               height: 50)
         textField.placeholder = "Enter your password"
         textField.isSecureTextEntry = true
@@ -205,6 +205,10 @@ class RegistrationController: UIViewController {
                 return
             }
         }
+        
+//        let vc = PhotoCardController()
+//        vc.modalPresentationStyle = .fullScreen
+//        present(vc, animated: true)
     }
     
     @objc private func didTapSelectPhoto() {
