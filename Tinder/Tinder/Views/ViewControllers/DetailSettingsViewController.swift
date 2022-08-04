@@ -22,7 +22,7 @@ class DetailSettingsViewController: UIViewController {
     }()
     
     var currentUser: User?
-    var section: Int? 
+    var section: Int?
 
     // MARK: - Lifecycle
     
@@ -71,8 +71,12 @@ class DetailSettingsViewController: UIViewController {
                 return
             }
         }
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchSettingsUser"), object: nil)
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "settingsUser"),
+                                            object: nil)
+        }
         self.dismiss(animated: true)
+
     }
     
     @objc func setInfo() {

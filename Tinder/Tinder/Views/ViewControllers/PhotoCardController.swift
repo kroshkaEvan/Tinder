@@ -30,40 +30,6 @@ class PhotoCardController: UIViewController {
         return stackView
     }()
     
-//    private let photoViewModel: [PhotoCardViewModel] = {
-//        let producers = [
-//            User(name: "Alex",
-//                 age: 28,
-//                 profession: "Tik-Tok model",
-//                 imagesUrl: Constants.Photo.girl6) ,
-//            User(name: "Marta",
-//                 age: 25,
-//                 profession: "Bloger",
-//                 imagesUrl: Constants.Photo.girl5) ,
-//            User(name: "Nicole",
-//                 age: 24,
-//                 profession: "Teacher",
-//                 imagesUrl: Constants.Photo.girl1) ,
-//            Advertiser(brandName: "State of Survival",
-//                       title: "Play Now",
-//                       posterName: Constants.Photo.advertisement) ,
-//            User(name: "Kim",
-//                 age: 34,
-//                 profession: "CEO",
-//                 imagesUrl: Constants.Photo.girl2) ,
-//            User(name: "Aisha",
-//                 age: 30,
-//                 profession: "Front-end Developer",
-//                 imagesUrl: Constants.Photo.girl3) ,
-//            User(name: "Anna",
-//                 age: 26,
-//                 profession: "Fashion model",
-//                 imagesUrl: Constants.Photo.girl4)
-//        ] as [ProducesPhotoCardViewModel]
-//        let viewModels = producers.map({return $0.getPhotoViewModel()})
-//        return viewModels
-//    }()
-    
     private var lastFetchedUser: User?
     
     private lazy var viewModel = [PhotoCardViewModel]()
@@ -73,7 +39,6 @@ class PhotoCardController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStackViewsLayout()
-        setupViewModel()
         addAllTargets()
         fetchUsersFromFirebase()
     }
@@ -112,18 +77,6 @@ class PhotoCardController: UIViewController {
         mainStackView.isLayoutMarginsRelativeArrangement = true
         mainStackView.layoutMargins = .init(top: 0, left: 5,
                                             bottom: 0, right: 5)
-    }
-    
-    private func setupViewModel() {
-        viewModel.forEach { (viewModel) in
-            let photoDeckView: UIView = {
-                let view = PhotoView(frame: .zero)
-                view.viewModel = viewModel
-                return view
-            }()
-            backgroundView.addSubview(photoDeckView)
-            photoDeckView.fillSuperview()
-        }
     }
     
     private func setupViewModel(user: User) {

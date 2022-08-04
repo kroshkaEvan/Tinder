@@ -55,7 +55,10 @@ class SettingsController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "fetchSettingsUser"), object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(fetchNewSettingsUser),
+                                               name: NSNotification.Name(rawValue: "settingsUser"),
+                                               object: nil)
     }
     
     // MARK: - Initializers
@@ -165,9 +168,9 @@ class SettingsController: UITableViewController {
     }
     
     private func addAllTargets() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
-                                                            target: self,
-                                                            action: #selector(didTapBack))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                           target: self,
+                                                           action: #selector(didTapBack))
         
         [firstButtonsStackView.firstSelectPhotoButton,
          firstButtonsStackView.secondSelectPhotoButton,
@@ -216,7 +219,7 @@ class SettingsController: UITableViewController {
         present(imagePicker, animated: true)
     }
     
-    @objc func loadList(notification: NSNotification){
+    @objc func fetchNewSettingsUser(notification: NSNotification){
         fetchCurrentUser()
     }
 }
