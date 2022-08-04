@@ -12,7 +12,7 @@ import JGProgressHUD
 import SDWebImage
 
 class SettingsController: UITableViewController {
-    
+
     // MARK: - Private properties
     
     private lazy var firstButtonsStackView = SelectPhotoButtonsStackView()
@@ -41,8 +41,8 @@ class SettingsController: UITableViewController {
                                                    bottom: padding, right: padding))
         return header
     }()
-    
-    var currentUser: User?
+        
+    private var currentUser: User?
     
     // MARK: - Lifecycle
     
@@ -51,6 +51,11 @@ class SettingsController: UITableViewController {
         setupUI()
         addAllTargets()
         fetchCurrentUser()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "fetchSettingsUser"), object: nil)
     }
     
     // MARK: - Initializers
@@ -176,7 +181,7 @@ class SettingsController: UITableViewController {
         }
     }
         
-    func fetchCurrentUser() {
+    private func fetchCurrentUser() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, error) in
             if let error = error {
@@ -209,6 +214,10 @@ class SettingsController: UITableViewController {
         imagePicker.delegate = self
         imagePicker.imageButton = button
         present(imagePicker, animated: true)
+    }
+    
+    @objc func loadList(notification: NSNotification){
+        fetchCurrentUser()
     }
 }
 

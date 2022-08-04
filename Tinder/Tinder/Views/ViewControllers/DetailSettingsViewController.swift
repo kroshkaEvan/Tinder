@@ -11,6 +11,8 @@ import FirebaseAuth
 
 class DetailSettingsViewController: UIViewController {
     
+    // MARK: - Public properties
+
     lazy var textField: CustomTextField = {
         let textField = CustomTextField(padding: 24,
                                               height: 50)
@@ -22,6 +24,8 @@ class DetailSettingsViewController: UIViewController {
     var currentUser: User?
     var section: Int? 
 
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
@@ -30,6 +34,8 @@ class DetailSettingsViewController: UIViewController {
                             action: #selector(setInfo),
                             for: .editingChanged)
     }
+    
+    // MARK: - Private Methods
     
     private func setupLayout() {
         view.backgroundColor = .lightGray
@@ -48,7 +54,9 @@ class DetailSettingsViewController: UIViewController {
                                                             action: #selector(didTapSave))
         navigationItem.rightBarButtonItem?.tintColor = .white
     }
-        
+    
+    // MARK: - Objc Methods
+    
     @objc private func didTapSave() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let documentData = ["userName" : currentUser?.name ?? "",
@@ -63,6 +71,7 @@ class DetailSettingsViewController: UIViewController {
                 return
             }
         }
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "fetchSettingsUser"), object: nil)
         self.dismiss(animated: true)
     }
     

@@ -205,10 +205,6 @@ class RegistrationController: UIViewController {
                 return
             }
         }
-        
-//        let vc = PhotoCardController()
-//        vc.modalPresentationStyle = .fullScreen
-//        present(vc, animated: true)
     }
     
     @objc private func didTapSelectPhoto() {
