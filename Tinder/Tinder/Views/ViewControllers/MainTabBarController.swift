@@ -13,8 +13,6 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        tabBar.tintColor = .orange
         setupVCs()
     }
     
@@ -22,7 +20,7 @@ class MainTabBarController: UITabBarController {
         guard let barItemView = item.value(forKey: "view") as? UIView else { return }
         let scalingRatio = CGFloat(0.7)
         let propertyAnimator = UIViewPropertyAnimator(duration: 0.3,
-                                                      dampingRatio: 0.5) {
+                                                      dampingRatio: 0.6) {
             barItemView.transform = CGAffineTransform.identity.scaledBy(x: scalingRatio,
                                                                         y: scalingRatio)
         }
@@ -51,5 +49,9 @@ class MainTabBarController: UITabBarController {
                                    image: UIImage(named: "chat"),
                                    selectedImage: UIImage(named: "chat"))
         ]
+        view.backgroundColor = .white
+        tabBar.tintColor = .orange
+        tabBar.backgroundColor = .white
+        
     }
 }

@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseFirestore
 import FirebaseAuth
+import FirebaseStorage
 import JGProgressHUD
 import SDWebImage
 
@@ -41,6 +42,8 @@ class SettingsController: UITableViewController {
                                                    bottom: padding, right: padding))
         return header
     }()
+    
+    private lazy var progressHUD = JGProgressHUD(style: .dark)
         
     private var currentUser: User?
     
@@ -191,6 +194,7 @@ class SettingsController: UITableViewController {
                 print(error)
                 return
             }
+            self.progressHUD.dismiss(animated: true)
             guard let dictionary = snapshot?.data() else { return }
             self.currentUser = User(dictionary: dictionary)
             self.loadUserPhotos()
@@ -199,17 +203,66 @@ class SettingsController: UITableViewController {
     }
     
     private func loadUserPhotos() {
-        guard let imageURL = currentUser?.imagesURL,
-              let url = URL(string: imageURL) else { return }
-        SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
-            self.firstButtonsStackView.firstSelectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        
+        if let imageURL = currentUser?.imagesURL, let url = URL(string: imageURL) {
+            SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
+                self.firstButtonsStackView.firstSelectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+            }
+        }
+
+        if let imageURL = currentUser?.imagesURL2, let url = URL(string: imageURL) {
+            SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
+                self.firstButtonsStackView.secondSelectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+            }
+        }
+
+        if let imageURL = currentUser?.imagesURL3, let url = URL(string: imageURL) {
+            SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
+                self.firstButtonsStackView.thirdSelectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+            }
+        }
+
+        if let imageURL = currentUser?.imagesURL4, let url = URL(string: imageURL) {
+            SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
+                self.secondButtonsStackView.firstSelectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+            }
+        }
+
+        if let imageURL = currentUser?.imagesURL5, let url = URL(string: imageURL) {
+            SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
+                self.secondButtonsStackView.secondSelectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+            }
+        }
+
+        if let imageURL = currentUser?.imagesURL6, let url = URL(string: imageURL) {
+            SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
+                self.secondButtonsStackView.thirdSelectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+            }
         }
     }
     
     // MARK: - Objc Methods
     
     @objc private func didTapBack() {
-        dismiss(animated: true)
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let documentData = ["userName" : currentUser?.name ?? "",
+                            "uid" : currentUser?.uid ?? "",
+                            "imagesURL" : currentUser?.imagesURL ?? "",
+                            "imagesURL2" : currentUser?.imagesURL2 ?? "",
+                            "imagesURL3" : currentUser?.imagesURL3 ?? "",
+                            "imagesURL4" : currentUser?.imagesURL4 ?? "",
+                            "imagesURL5" : currentUser?.imagesURL5 ?? "",
+                            "imagesURL6" : currentUser?.imagesURL6 ?? "",
+                            "age" : currentUser?.age ?? 18,
+                            "profession" : currentUser?.profession ?? "",
+                            "bio" : currentUser?.bio ?? ""] as [String : Any]
+        Firestore.firestore().collection("users").document(uid).setData(documentData) { (error) in
+            if let error = error {
+                print(error)
+                return
+            }
+        }
+        self.dismiss(animated: true)
     }
     
     @objc private func didTapSelectPhoto(button: UIButton) {
@@ -220,6 +273,8 @@ class SettingsController: UITableViewController {
     }
     
     @objc func fetchNewSettingsUser(notification: NSNotification){
+        self.progressHUD.show(in: view, animated: true)
+        self.progressHUD.textLabel.text = "Saving..."
         fetchCurrentUser()
     }
 }
@@ -233,6 +288,42 @@ extension SettingsController: UIImagePickerControllerDelegate, UINavigationContr
         imageButton?.setImage(selectedPhoto.withRenderingMode(.alwaysOriginal),
                                                                 for: .normal)
         self.dismiss(animated: true)
+        
+        progressHUD.textLabel.text = "Uploading image..."
+        progressHUD.show(in: view, animated: true)
+        let filename = UUID().uuidString
+        let reference = Storage.storage().reference(withPath: "/images/\(filename)")
+        guard let uploadData = selectedPhoto.jpegData(compressionQuality: 0.75) else {return}
+        reference.putData(uploadData,
+                          metadata: nil) { [weak self] (nil, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            reference.downloadURL { (url, error) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                switch imageButton {
+                case self?.firstButtonsStackView.firstSelectPhotoButton:
+                    self?.currentUser?.imagesURL = url?.absoluteString
+                case self?.firstButtonsStackView.secondSelectPhotoButton:
+                    self?.currentUser?.imagesURL2 = url?.absoluteString
+                case self?.firstButtonsStackView.thirdSelectPhotoButton:
+                    self?.currentUser?.imagesURL3 = url?.absoluteString
+                case self?.secondButtonsStackView.firstSelectPhotoButton:
+                    self?.currentUser?.imagesURL4 = url?.absoluteString
+                case self?.secondButtonsStackView.secondSelectPhotoButton:
+                    self?.currentUser?.imagesURL5 = url?.absoluteString
+                case self?.secondButtonsStackView.thirdSelectPhotoButton:
+                    self?.currentUser?.imagesURL6 = url?.absoluteString
+                default:
+                    return
+                }
+            }
+            self?.progressHUD.dismiss(animated: true)
+        }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

@@ -20,15 +20,11 @@ class PhotoCardController: UIViewController {
     
     private lazy var bottomButtonsStackView = BottomButtonsControlsStackView()
     
-    private lazy var mainStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [backgroundView])
-        stackView.axis = .vertical
-        return stackView
-    }()
-    
     private var lastFetchedUser: User?
     
     private lazy var viewModel = [PhotoCardViewModel]()
+    
+    private lazy var progressHUD = JGProgressHUD(style: .dark)
 
     // MARK: - Lifecycle
     
@@ -37,6 +33,16 @@ class PhotoCardController: UIViewController {
         setupLayout()
         addAllTargets()
         fetchUsersFromFirebase()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .white
+        navigationController?.navigationBar.tintColor = .orange
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
     // MARK: - Private Methods
@@ -64,46 +70,47 @@ class PhotoCardController: UIViewController {
     }
     
     private func setupLayout() {
-        view.addSubview(mainStackView)
+        view.addSubview(backgroundView)
         view.backgroundColor = .white
-        mainStackView.fillSuperview()
-        mainStackView.bringSubviewToFront(backgroundView)
-        mainStackView.isLayoutMarginsRelativeArrangement = true
-        mainStackView.layoutMargins = .init(top: 10, left: 5,
-                                            bottom: 0, right: 5)
+        backgroundView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                              leading: view.safeAreaLayoutGuide.leadingAnchor,
+                              bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                              trailing: view.safeAreaLayoutGuide.trailingAnchor,
+                              padding:  .init(top: 10, left: 5,
+                                              bottom: 10, right: 5))
         backgroundView.addSubview(bottomButtonsStackView)
         bottomButtonsStackView.anchor(top: nil,
-                                      leading: view.leadingAnchor,
+                                      leading: backgroundView.leadingAnchor,
                                       bottom: backgroundView.bottomAnchor,
-                                      trailing: view.trailingAnchor,
-                                      padding: .init(top: 0, left: 0,
-                                                     bottom: 20, right: 0))
+                                      trailing: backgroundView.trailingAnchor,
+                                      padding: .init(top: 0,
+                                                     left: 0,
+                                                     bottom: 20,
+                                                     right: 0))
     }
     
     private func setupViewModel(user: User) {
-        let view = PhotoView(frame: .zero)
-        view.viewModel = user.getPhotoViewModel()
-        backgroundView.addSubview(view)
-        view.anchor(top: backgroundView.topAnchor,
+        let photoView = PhotoView(frame: .zero)
+        photoView.viewModel = user.getPhotoViewModel()
+        backgroundView.addSubview(photoView)
+        photoView.anchor(top: backgroundView.topAnchor,
                     leading: backgroundView.leadingAnchor,
                     bottom: backgroundView.bottomAnchor,
                     trailing: backgroundView.trailingAnchor,
                     padding: .init(top: 0, left: 0,
                                    bottom: 20, right: 0))
-        backgroundView.sendSubviewToBack(view)
+        backgroundView.sendSubviewToBack(photoView)
     }
 
     private func fetchUsersFromFirebase() {
-        let hud = JGProgressHUD(style: .dark)
-        hud.textLabel.text = "Fetching users"
-        hud.show(in: view, animated: true)
-        let query = Firestore.firestore()
-            .collection("users")
-            .order(by: "uid")
-            .start(after: [lastFetchedUser?.uid ?? ""])
-            .limit(to: 2)
+        progressHUD.textLabel.text = "Fetching users"
+        progressHUD.show(in: view, animated: true)
+        let query = Firestore.firestore().collection("users")
+//            query.order(by: "uid")
+//                .start(after: [lastFetchedUser?.uid ?? ""])
+//                .limit(to: 2)
         query.getDocuments { [weak self] (snapshot, error) in
-            hud.dismiss(animated: true)
+            self?.progressHUD.dismiss(animated: true)
             if let error = error {
                 print(error)
                 return
