@@ -74,8 +74,12 @@ class SettingsController: UITableViewController {
         return 25
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
+    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerLabel = HeaderLabel()
+        let headerLabel = CustomInfoLabel()
         headerLabel.textInsets = .init(top: 0, left: 40, bottom: 10, right: 0)
         headerLabel.font = UIFont.systemFont(ofSize: 20, weight: .ultraLight)
         switch section {
@@ -90,6 +94,12 @@ class SettingsController: UITableViewController {
         case 3:
             headerLabel.text = "Profession"
             return headerLabel
+        case 4:
+            headerLabel.text = "Bio"
+            return headerLabel
+        case 5:
+            headerLabel.text = "Age range"
+            return headerLabel
         default:
             headerLabel.text = "Bio"
             return headerLabel
@@ -97,7 +107,7 @@ class SettingsController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 7
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -109,21 +119,22 @@ class SettingsController: UITableViewController {
                                 reuseIdentifier: nil)
         switch indexPath.section {
         case 1:
-            cell.textField.placeholder = "Enter name"
-            cell.textField.text = currentUser?.name
+            cell.infoLabel.text = currentUser?.name
         case 2:
-            cell.textField.placeholder = "Enter age"
             if let age = currentUser?.age {
-                cell.textField.text = String(age)
+                cell.infoLabel.text = String(age)
             }
         case 3:
-            cell.textField.placeholder = "Enter profession"
-            cell.textField.text = currentUser?.profession
+            cell.infoLabel.text = currentUser?.profession
         case 4:
-            cell.textField.placeholder = "Enter bio"
-            cell.textField.text = currentUser?.bio
+            cell.infoLabel.text = currentUser?.bio
+        case 5:
+            if let minAge = currentUser?.minSeekingAge,
+               let maxAge = currentUser?.maxSeekingAge{
+                cell.infoLabel.text = "\(minAge) - \(maxAge)"
+            }
         default:
-            cell.textField.placeholder = "Enter bio"
+            cell.infoLabel.text = "Enter bio"
         }
         return cell
     }
@@ -140,17 +151,27 @@ class SettingsController: UITableViewController {
         case 1:
             detailVC.textField.placeholder = "Enter name"
             detailVC.textField.text = currentUser?.name
+            detailVC.setupLayout(type: .textField)
         case 2:
+            detailVC.setupLayout(type: .textField)
             detailVC.textField.placeholder = "Enter age"
             if let age = currentUser?.age {
                 detailVC.textField.text = String(age)
             }
         case 3:
+            detailVC.setupLayout(type: .textField)
             detailVC.textField.placeholder = "Enter profession"
             detailVC.textField.text = currentUser?.profession
         case 4:
+            detailVC.setupLayout(type: .textField)
             detailVC.textField.placeholder = "Enter bio"
             detailVC.textField.text = currentUser?.bio
+        case 5:
+            detailVC.minSlider.value = Float(currentUser?.minSeekingAge ?? 18)
+            detailVC.maxSlider.value = Float(currentUser?.maxSeekingAge ?? 60)
+//            detailVC.setMaxAge(slider: detailVC.maxSlider)
+//            detailVC.setMinAge(slider: detailVC.minSlider)
+            detailVC.setupLayout(type: .slider)
         default:
             detailVC.textField.placeholder = "Enter bio"
         }
@@ -255,7 +276,9 @@ class SettingsController: UITableViewController {
                             "imagesURL6" : currentUser?.imagesURL6 ?? "",
                             "age" : currentUser?.age ?? 18,
                             "profession" : currentUser?.profession ?? "",
-                            "bio" : currentUser?.bio ?? ""] as [String : Any]
+                            "bio" : currentUser?.bio ?? "",
+                            "minSeekingAge" : currentUser?.minSeekingAge ?? 18,
+                            "maxSeekingAge" : currentUser?.maxSeekingAge ?? 60] as [String : Any]
         Firestore.firestore().collection("users").document(uid).setData(documentData) { (error) in
             if let error = error {
                 print(error)
@@ -322,6 +345,7 @@ extension SettingsController: UIImagePickerControllerDelegate, UINavigationContr
                     return
                 }
             }
+            
             self?.progressHUD.dismiss(animated: true)
         }
     }

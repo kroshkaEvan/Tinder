@@ -20,10 +20,12 @@ struct User: ProducesPhotoCardViewModel {
     var imagesURL6: String?
     var uid: String?
     var bio: String?
+    var minSeekingAge: Int?
+    var maxSeekingAge: Int?
     
     init(dictionary: [String : Any]) {
         self.name = dictionary["userName"] as? String ?? ""
-        self.age = dictionary["age"] as? Int
+        self.age = dictionary["age"] as? Int ?? 18
         self.profession = dictionary["profession"] as? String ?? ""
         self.imagesURL = dictionary["imagesURL"] as? String ?? ""
         self.imagesURL2 = dictionary["imagesURL2"] as? String ?? ""
@@ -33,6 +35,8 @@ struct User: ProducesPhotoCardViewModel {
         self.imagesURL6 = dictionary["imagesURL6"] as? String ?? ""
         self.uid = dictionary["uid"] as? String ?? ""
         self.bio = dictionary["bio"] as? String ?? ""
+        self.minSeekingAge = dictionary["minSeekingAge"] as? Int ?? 18
+        self.maxSeekingAge = dictionary["maxSeekingAge"] as? Int ?? 60
     }
     
     func getPhotoViewModel() -> PhotoCardViewModel{

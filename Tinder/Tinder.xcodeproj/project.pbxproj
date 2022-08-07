@@ -11,9 +11,8 @@
 		BC2947E12897D5A300105E87 /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2947E02897D5A300105E87 /* SelectButton.swift */; };
 		BC294803289959AB00105E87 /* SelectPhotoButtonsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC294802289959AA00105E87 /* SelectPhotoButtonsStackView.swift */; };
 		BC29480528997CE000105E87 /* SettingsImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC29480428997CDF00105E87 /* SettingsImagePicker.swift */; };
-		BC2948072899AAE100105E87 /* HeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2948062899AAE000105E87 /* HeaderLabel.swift */; };
+		BC2948072899AAE100105E87 /* CustomInfoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2948062899AAE000105E87 /* CustomInfoLabel.swift */; };
 		BC2948092899ABCB00105E87 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2948082899ABCB00105E87 /* SettingsCell.swift */; };
-		BC29480B2899AE1C00105E87 /* SettingsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC29480A2899AE1C00105E87 /* SettingsTextField.swift */; };
 		BC29480D289B01F200105E87 /* DetailSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC29480C289B01F200105E87 /* DetailSettingsViewController.swift */; };
 		BC545D2B289C7764007A2605 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC545D2A289C7764007A2605 /* MainTabBarController.swift */; };
 		BC545D2D289C77CB007A2605 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC545D2C289C77CB007A2605 /* ChatController.swift */; };
@@ -46,9 +45,8 @@
 		BC2947E02897D5A300105E87 /* SelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
 		BC294802289959AA00105E87 /* SelectPhotoButtonsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhotoButtonsStackView.swift; sourceTree = "<group>"; };
 		BC29480428997CDF00105E87 /* SettingsImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsImagePicker.swift; sourceTree = "<group>"; };
-		BC2948062899AAE000105E87 /* HeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderLabel.swift; sourceTree = "<group>"; };
+		BC2948062899AAE000105E87 /* CustomInfoLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInfoLabel.swift; sourceTree = "<group>"; };
 		BC2948082899ABCB00105E87 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
-		BC29480A2899AE1C00105E87 /* SettingsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextField.swift; sourceTree = "<group>"; };
 		BC29480C289B01F200105E87 /* DetailSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSettingsViewController.swift; sourceTree = "<group>"; };
 		BC545D2A289C7764007A2605 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		BC545D2C289C77CB007A2605 /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
@@ -150,9 +148,8 @@
 				BC2947E02897D5A300105E87 /* SelectButton.swift */,
 				BC294802289959AA00105E87 /* SelectPhotoButtonsStackView.swift */,
 				BC29480428997CDF00105E87 /* SettingsImagePicker.swift */,
-				BC2948062899AAE000105E87 /* HeaderLabel.swift */,
+				BC2948062899AAE000105E87 /* CustomInfoLabel.swift */,
 				BC2948082899ABCB00105E87 /* SettingsCell.swift */,
-				BC29480A2899AE1C00105E87 /* SettingsTextField.swift */,
 				BC54C401287863A60009B8F5 /* CustomTextField.swift */,
 			);
 			path = OtherViews;
@@ -340,13 +337,12 @@
 				BCE68ADE284E025C00EBB5B6 /* DownButtonsControlsStackView.swift in Sources */,
 				BC545D2D289C77CB007A2605 /* ChatController.swift in Sources */,
 				BCEC5B1D28925074005CA649 /* Bindable.swift in Sources */,
-				BC2948072899AAE100105E87 /* HeaderLabel.swift in Sources */,
+				BC2948072899AAE100105E87 /* CustomInfoLabel.swift in Sources */,
 				BCE68AF2284E39E100EBB5B6 /* TopNavigationStackView.swift in Sources */,
 				BCEC5B212896F090005CA649 /* Extension + UIButton.swift in Sources */,
 				BC2948092899ABCB00105E87 /* SettingsCell.swift in Sources */,
 				BC2947E12897D5A300105E87 /* SelectButton.swift in Sources */,
 				BC29480528997CE000105E87 /* SettingsImagePicker.swift in Sources */,
-				BC29480B2899AE1C00105E87 /* SettingsTextField.swift in Sources */,
 				BCC6FCD22848BFD500E6E8E0 /* AppDelegate.swift in Sources */,
 				BC54C40028784B140009B8F5 /* RegistrationController.swift in Sources */,
 				BC29480D289B01F200105E87 /* DetailSettingsViewController.swift in Sources */,

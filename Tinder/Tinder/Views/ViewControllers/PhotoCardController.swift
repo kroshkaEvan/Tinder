@@ -106,9 +106,9 @@ class PhotoCardController: UIViewController {
         progressHUD.textLabel.text = "Fetching users"
         progressHUD.show(in: view, animated: true)
         let query = Firestore.firestore().collection("users")
-//            query.order(by: "uid")
+//            .order(by: "uid")
 //                .start(after: [lastFetchedUser?.uid ?? ""])
-//                .limit(to: 2)
+//                .limit(to: 1)
         query.getDocuments { [weak self] (snapshot, error) in
             self?.progressHUD.dismiss(animated: true)
             if let error = error {
